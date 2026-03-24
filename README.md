@@ -1,3 +1,1 @@
-# JASKathon2Unjumbler
-
-this is what we are doing for the unjumbler. hope you enjoy
+# Week 2 Sprint - Go!!
