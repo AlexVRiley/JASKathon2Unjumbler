@@ -15,9 +15,9 @@ MonoBehaviour:
   m_PixelRect:
     serializedVersion: 2
     x: 0
-    y: 43.2
+    y: 34.4
     width: 1536
-    height: 772.8
+    height: 791.2
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
@@ -44,7 +44,7 @@ MonoBehaviour:
     x: 0
     y: 36
     width: 1536
-    height: 716.8
+    height: 735.2
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
     x: 1172.8
     y: 0
     width: 363.19995
-    height: 716.8
+    height: 735.2
   m_MinSize: {x: 276, y: 76}
   m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 14}
@@ -94,7 +94,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 290.4
-    height: 424
+    height: 434.4
   m_MinSize: {x: 201, y: 226}
   m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 15}
@@ -118,9 +118,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 424
+    y: 434.4
     width: 1172.8
-    height: 292.8
+    height: 300.80002
   m_MinSize: {x: 231, y: 276}
   m_MaxSize: {x: 10001, y: 10026}
   m_ActualView: {fileID: 13}
@@ -150,7 +150,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1536
-    height: 772.8
+    height: 791.2
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 752.8
+    y: 771.2
     width: 1536
     height: 20
   m_MinSize: {x: 0, y: 0}
@@ -220,7 +220,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1172.8
-    height: 716.8
+    height: 735.2
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
@@ -246,7 +246,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1172.8
-    height: 424
+    height: 434.4
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
     x: 290.4
     y: 0
     width: 882.4
-    height: 424
+    height: 434.4
   m_MinSize: {x: 202, y: 226}
   m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 16}
@@ -567,9 +567,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 448
+    y: 458.4
     width: 1171.8
-    height: 266.8
+    height: 274.80002
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -615,11 +615,7 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs:
-    - m_Data: 0
-    - m_Data: 50398
-    - m_Data: 50692
-    - m_Data: 1000000000
+    m_ExpandedIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -651,11 +647,7 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs:
-    - m_Data: 0
-    - m_Data: 50398
-    - m_Data: 50692
-    - m_Data: 1000000000
+    m_ExpandedIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -742,7 +734,7 @@ MonoBehaviour:
     x: 1173.8
     y: 24
     width: 362.19995
-    height: 690.8
+    height: 709.2
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -794,7 +786,7 @@ MonoBehaviour:
     x: 0
     y: 24
     width: 289.4
-    height: 398
+    height: 408.4
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -811,8 +803,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs:
-      - m_Data: -3992
+      m_SelectedIDs: []
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs: []
@@ -866,7 +857,7 @@ MonoBehaviour:
     x: 291.4
     y: 24
     width: 880.4
-    height: 398
+    height: 408.4
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1439,7 +1430,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 0, y: 0, z: 0}
     speed: 2
-    m_Value: {x: 351.7453, y: 159.30359, z: -0.27462023}
+    m_Value: {x: 0, y: 0, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1492,7 +1483,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 10
     speed: 2
-    m_Value: 325.8821
+    m_Value: 10
   m_Ortho:
     m_Target: 1
     speed: 2
