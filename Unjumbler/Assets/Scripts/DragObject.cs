@@ -1,0 +1,69 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDragHandler
+{
+    /* Variables */
+    private CanvasGroup canvasGroup;
+    private RectTransform rectTransform;
+    private Canvas canvas;
+    private Transform noGrouping;
+
+    [SerializeField]
+    private GameObject draggableLetter;
+    
+
+    /* I am using the awake method because it only runs once when the object it is 
+     * attatched to becomes active in the scene */
+    private void Awake()
+    {
+        /* Setting up all the variables to get the component of the object this script 
+         * is attatched to. So in this case when a draggable letter instantiates it will 
+         * look for its own Transform, CanvasGroup and its parent Canvas */
+        rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        canvas = GetComponentInParent<Canvas>(); // The canvas is a parent so we use this
+
+        /* When the Letters get instantiated we need to find the transform of an object
+         * named "NoGrouping" in order for dragging to work properly */
+        noGrouping = GameObject.Find("NoGrouping").transform;
+    }
+
+    /* This function calls when the users clicks and drags the object this script is 
+     * attached to */
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        /* When the user begins dragging the letter we want to keep checking objects
+         * below it. We also want to change the objects alpha to add some user feedback
+         * into their interaction. Changing the alpha also helps the user see "under"
+         * the object they are dragging. Lastly we also need to make sure the object
+         * is removed from its formatting parent (LetterSpawnGroup) So it's transform
+         * can be changed from the grid layout it is set to */
+        canvasGroup.blocksRaycasts = false; // Allows the raycast to go through the object
+        canvasGroup.alpha = 0.6f;  // Alpha change
+        
+        /* Remove parent and set to special empty object "NoGrouping" which is a child of
+         * "GameplayUI" canvas and not a child of "LetterSpawnGroup" */
+        draggableLetter.transform.SetParent(noGrouping, true); 
+    }
+
+    /* This just makes sure the object being interacted with (dragged) stays with the cursor */
+    public void OnDrag(PointerEventData eventData)
+    {
+        /* Finds the objects position in the scene then adds the cursors position change
+         * divided by the canvas scale to make sure the position stays relitive to the cursor */
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    }
+
+    /* This function calls when the object being dragged is "dropped" */
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        /* We reset the alpha and raycast settings we changed in OnBeginDrag */
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    /* TODO
+     * - Add Variables to compare DraggedLetter's letter to the SnapTargets Letter
+     */
+}
