@@ -3146,9 +3146,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2022491869}
   - component: {fileID: 2022491870}
-  - component: {fileID: 2022491871}
   m_Layer: 5
-  m_Name: LetterSpawnGroup(JumblerScript)
+  m_Name: LetterSpawnGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3198,47 +3197,6 @@ MonoBehaviour:
   m_Spacing: {x: 11, y: 11}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &2022491871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022491868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e2e1bb8d9ac9f548824584e9c1df4be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JumblerLogic
-  quotes:
-  - We can only see a short distance ahead, but we can see plenty there that needs
-    to be done.
-  - That brain of mine is something more than merely mortal; as time will show.
-  - "The most dangerous phrase in the language is, \u2018We've always done it this
-    way."
-  - Hope and curiosity about the future seemed better than guarantees
-  - In mathematics you don't understand things. You just get used to them.
-  - I like to learn. That's an art and a science.
-  - We're having an information explosion, and it's certainly obvious that information
-    is of no use unless it's available
-  - Logic is the foundation of the certainty of all the knowledge we acquire.
-  - The world would be a better place if more engineers, like me, hated technology
-  - "I\u2019ll bet you don\u2019t have a computer in your living room."
-  person:
-  - Alan Turing
-  - Ada Lovelace
-  - Grace Hopper
-  - Hedy Lamarr
-  - John von Neumann
-  - Katherin Johnson
-  - Sister Mary Kenneth Keller
-  - Leonhard Euler
-  - Radia Perlman
-  - Mary Allen Wilkes
-  unjumbled: 
-  numQuote: 10
-  author: 
-  jumbled: 
 --- !u!1 &2099717449
 GameObject:
   m_ObjectHideFlags: 0
@@ -3582,3 +3540,4 @@ SceneRoots:
   - {fileID: 843351251}
   - {fileID: 305071085}
   - {fileID: 767317664}
+  - {fileID: 213018491}
