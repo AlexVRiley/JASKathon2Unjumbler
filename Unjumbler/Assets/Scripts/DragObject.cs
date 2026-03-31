@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDragHandler
 {
@@ -11,7 +12,8 @@ public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
 
     [SerializeField]
     private GameObject draggableLetter;
-    
+    [SerializeField]
+    private TMP_Text dragLetterText;
 
     /* I am using the awake method because it only runs once when the object it is 
      * attatched to becomes active in the scene */
@@ -23,6 +25,12 @@ public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         canvas = GetComponentInParent<Canvas>(); // The canvas is a parent so we use this
+
+        /* Adding in the draggable letters text mesh pro text object for comparison */
+        dragLetterText = GetComponent<TMP_Text>();
+
+        // Set the dragLetterText to the proper instantiated letter
+
 
         /* When the Letters get instantiated we need to find the transform of an object
          * named "NoGrouping" in order for dragging to work properly */

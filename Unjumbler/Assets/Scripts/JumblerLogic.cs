@@ -6,11 +6,12 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using TMPro;
 
 
 public class JumblerLogic : MonoBehaviour
 {
-    public string[] quotes = new[] {"We can only see a short distance ahead, but we " +
+    public string[] quotes = new [] {"We can only see a short distance ahead, but we " +
         "can see plenty there that needs to be done.", "That brain of mine is something " +
         "more than merely mortal; as time will show.", "The most dangerous phrase in the language is, " +
         "‘We've always done it this way.", "Hope and curiosity about the future seemed better " +
@@ -26,14 +27,23 @@ public class JumblerLogic : MonoBehaviour
     public char[] unjumbled;
     public int numQuote = 10;
     public char[] author;
-    public List<char> jumbled;
+    public char [] jumbled;
     bool test;
+
+    [SerializeField]
+    private GameObject letterPrefab;
+    [SerializeField]
+    private GameObject letterSpawn;
+    [SerializeField]
+    private GameObject snapPrefab;
+    [SerializeField]
+    private GameObject snapSpawn;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         stringJumble();
-        System.Console.WriteLine(jumbled);
         
         bool answer = testAnswer();
         if (answer == true)
@@ -45,14 +55,22 @@ public class JumblerLogic : MonoBehaviour
             System.Console.WriteLine("Sorry, Try Again!");
         }
 
+        instantiateDraggableLetters();
+
     }
     void stringJumble()
     {
         int randQuote = Random.Range(0,numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
         author = person[randQuote].ToCharArray();
-        unjumbled = unjumbled.Concat(author).ToArray(); 
-        jumbled = unjumbled.ToList();   //moves string to list for jumbling
+        unjumbled = unjumbled.Concat(" -").ToArray();
+        unjumbled = unjumbled.Concat(author).ToArray();
+        jumbled = new char[unjumbled.Length];
+
+        for (int j = 0; j <= unjumbled.Length - 1; j++)
+        {
+            jumbled[j] = unjumbled[j];
+        }
 
         //jumbles array
         for (int i = 0; i < unjumbled.Length - 1; i++)
@@ -61,7 +79,8 @@ public class JumblerLogic : MonoBehaviour
             char temp = unjumbled[randI];
             if (temp != ' ' && unjumbled[randI] != ' ')
             {
-                jumbled[randI] = temp;
+                jumbled[i] = temp;
+                Debug.Log(jumbled[i]);
             }
             
         }
@@ -79,6 +98,25 @@ public class JumblerLogic : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void instantiateDraggableLetters()
+    {
+        for (int x = 0; x < jumbled.Length - 1; x++)
+        {
+            Instantiate(letterPrefab, letterSpawn.transform, true);
+            letterPrefab.name = "Letter " + x;
+            letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString();
+        }
+    }
+    public void instantiateSnapTarget()
+    {
+        for (int x = 0; x < unjumbled.Length - 1; x++)
+        {
+            Instantiate(snapPrefab, snapSpawn.transform, true);
+            snapPrefab.name = "Target " + x;
+            snapPrefab.GetComponentInChildren<TMP_Text>().text = unjumbled[x].ToString();
+        }
     }
 }
    
