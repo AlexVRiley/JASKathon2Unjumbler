@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class SnapTarget : MonoBehaviour, IDropHandler
 {
+
     /* When the user ends their drag on a draggable object we check the following: */
     public void OnDrop(PointerEventData eventData)
     {
