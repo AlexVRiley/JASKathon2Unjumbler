@@ -26,7 +26,7 @@ public class JumblerLogic : MonoBehaviour
     public char[] unjumbled;
     public int numQuote = 10;
     public char[] author;
-    public List<char> jumbled;
+    public char[] jumbled;
     bool test;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -51,8 +51,9 @@ public class JumblerLogic : MonoBehaviour
         int randQuote = Random.Range(0,numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
         author = person[randQuote].ToCharArray();
+        unjumbled = unjumbled.Concat(" -").ToArray();
         unjumbled = unjumbled.Concat(author).ToArray(); 
-        jumbled = unjumbled.ToList();   //moves string to list for jumbling
+        jumbled = unjumbled;   //moves string to list for jumbling
 
         //jumbles array
         for (int i = 0; i < unjumbled.Length - 1; i++)
