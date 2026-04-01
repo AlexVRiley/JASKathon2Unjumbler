@@ -7,6 +7,76 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
+    // Pseudocode for JumblerLogic.cs
+    // Written by Justina & K-Lyn Tues. March 31 - Tutorial Time Meeting
+    // To be written as real C++ code once UI and logic are linked
+
+
+    // "snapTarget_isFilled" bool
+    // "snapTarget_isCorrect" bool
+    // "snapTarget_Colour" green, red, null
+
+
+    // if (level = 1 || level = 2) {
+    // display stringJumble()
+    // }
+
+
+    // if (level = 3 || level = 4) {
+    // display infinitelyDraggableAlphabet
+    // }
+
+
+    // SnapTarget.cs
+        // if(snapTarget_isFilled == true)
+        // {
+        //      if (snapTarget_isCorrect == true) { // snapTarget_Colour = green }
+        //      else { // snapTarget_Colour = red }
+        //    
+        //      if (level = 1 || level = 3) {
+        //          //display snapTarget_Colour
+        //      }
+        //
+        //      if (level = 2 || level = 4) {
+        //          //only display snapTarget_Colour if user hits "Check" button
+        //      }
+        // }
+
+
+        // WHEN HINT BUTTON PRESSED
+        // "hintCounter" int = 0
+        //  hintCounter ++;
+        //  if(hintCounter = 1){ // unjumbleAuthor() }
+        //  if(hintCounter)
+        //  else{ // revealRandomLetter() }
+       
+        // void unjumbleAuthor(){
+        //
+        // }
+
+
+        // void revealRandomLetter(){
+        //
+        // }
+
+
+WHEN CAPITALIZATION BUTTON PRESSED
+// “showCapitalization” = bool false
+// “hideCapitalization” = bool true
+
+
+// if(showCapitalization == false){
+// showCapitalization = true;
+// hideCapitalization = false;
+// //makeSentenceCase() //i.e. lower & upper-case according to quote
+// }
+// else {
+// showCapitalization = false;
+// hideCapitalization = true;
+// //makeAllCaps()
+// }
+
+
 
 public class JumblerLogic : MonoBehaviour
 {
