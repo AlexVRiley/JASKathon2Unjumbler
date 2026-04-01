@@ -48,7 +48,7 @@ using Unity.Burst.CompilerServices;
 // }
 
 
-    string hint{
+/*    string hint{
         hintCount ++;
         if (hintCount = 1){ // reveal Author name}
         for (int l = 0; l > unjumbled.Length; l++) {
@@ -108,7 +108,7 @@ using Unity.Burst.CompilerServices;
             return true;
         }
     }
-
+*/
 
 
 
