@@ -40,7 +40,7 @@ public class JumblerLogic : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         stringJumble();
         
@@ -55,6 +55,7 @@ public class JumblerLogic : MonoBehaviour
         }
 
         instantiateDraggableLetters();
+        instantiateSnapTarget();
 
     }
     void stringJumble()
@@ -101,20 +102,31 @@ public class JumblerLogic : MonoBehaviour
 
     public void instantiateDraggableLetters()
     {
-        for (int x = 0; x < jumbled.Length - 1; x++)
+        for (int x = 0; x < unjumbled.Length; x++)
         {
-            Instantiate(letterPrefab, letterSpawn.transform, true);
-            letterPrefab.name = "Letter " + x;
-            letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString();
+            GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+            instance.name = "Letter " + x;
+
+            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
+            textComponent.text = jumbled[x].ToString();
+
+          
         }
     }
     public void instantiateSnapTarget()
     {
-        for (int x = 0; x < unjumbled.Length - 1; x++)
+        for (int x = 0; x < unjumbled.Length; x++)
         {
-            Instantiate(snapPrefab, snapSpawn.transform, true);
-            snapPrefab.name = "Target " + x;
-            snapPrefab.GetComponentInChildren<TMP_Text>().text = unjumbled[x].ToString();
+            GameObject instance = Instantiate(snapPrefab, snapSpawn.transform, true);
+            instance.name = "Target " + x;
+
+            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
+            textComponent.text = unjumbled[x].ToString();
+
+            if (string.IsNullOrWhiteSpace(textComponent.text))
+            {
+                instance.GetComponent<CanvasRenderer>().SetAlpha(0);
+            }
         }
     }
 }
