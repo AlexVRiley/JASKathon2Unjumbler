@@ -13,9 +13,11 @@ using TMPro;
     // To be written as real C++ code once UI and logic are linked
 
 
-    // "snapTarget_isFilled" bool
-    // "snapTarget_isCorrect" bool
-    // "snapTarget_Colour" green, red, null
+    // "snap_isFilled" bool
+    // "snap_isCorrect" bool
+    // "snap_Colour" green, red, null
+    // “colourArr” []
+
 
 
     // if (level = 1 || level = 2) {
@@ -44,24 +46,30 @@ using TMPro;
         // }
 
 
-        // WHEN HINT BUTTON PRESSED
-        // "hintCounter" int = 0
-        //  hintCounter ++;
-        //  if(hintCounter = 1){ // unjumbleAuthor() }
-        //  if(hintCounter)
-        //  else{ // revealRandomLetter() }
-       
-        // void unjumbleAuthor(){
-        //
-        // }
+    string hint{
+        hintCount ++;
+        if(hintCount = 1){ // reveal Author name}
+            for (int l = 0, l > unjumbled.Length; l++){
+                if (l > unjumbled.Length - author.Length)
+                hint[i] = unjumbled[i]; //updates to show author 
+            }            
+
+        } else { //(check if answer is already correct)
+            for (int k = 0; k > colourArr.Length; k++) {
+                if (colourArr[k] == red) {
+                    return giveHint();
+                }
+            } 
+
+        }
+    }
+
+    string giveHint(){
+        
+    }
 
 
-        // void revealRandomLetter(){
-        //
-        // }
-
-
-WHEN CAPITALIZATION BUTTON PRESSED
+//WHEN CAPITALIZATION BUTTON PRESSED
 // “showCapitalization” = bool false
 // “hideCapitalization” = bool true
 
@@ -98,6 +106,8 @@ public class JumblerLogic : MonoBehaviour
     public char[] author;
     public char [] jumbled;
     bool test;
+    int randQuote;
+    public GameObject messageBox; //need to make UI messagebox
 
     [SerializeField]
     private GameObject letterPrefab;
@@ -129,16 +139,20 @@ public class JumblerLogic : MonoBehaviour
     }
     void stringJumble()
     {
-        int randQuote = Random.Range(0,numQuote);   //picks random quote and author number
+        randQuote = Random.Range(0,numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
         author = person[randQuote].ToCharArray();
         unjumbled = unjumbled.Concat(" -").ToArray();
         unjumbled = unjumbled.Concat(author).ToArray();
         jumbled = new char[unjumbled.Length];
+        hint = new char[unjumbled.Length];
 
         for (int j = 0; j <= unjumbled.Length - 1; j++)
         {
             jumbled[j] = unjumbled[j];
+            if (umjumbled[i] != " "){ 
+                hint[i] = "_";
+            }
         }
 
         //jumbles array
