@@ -7,83 +7,108 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting.FullSerializer;
+using Unity.Burst.CompilerServices;
 
-    // Pseudocode for JumblerLogic.cs
-    // Written by Justina & K-Lyn Tues. March 31 - Tutorial Time Meeting
-    // To be written as real C++ code once UI and logic are linked
-
-
-    // "snap_isFilled" bool
-    // "snap_isCorrect" bool
-    // "snap_Colour" green, red, null
-    // “colourArr” []
+// Pseudocode for JumblerLogic.cs
+// Written by Justina & K-Lyn Tues. March 31 - Tutorial Time Meeting
+// To be written as real C++ code once UI and logic are linked
 
 
-
-    // if (level = 1 || level = 2) {
-    // display stringJumble()
-    // }
-
-
-    // if (level = 3 || level = 4) {
-    // display infinitelyDraggableAlphabet
-    // }
+// "snap_isFilled" bool
+// "snap_isCorrect" bool
+// "snap_Colour" green, red, null
+// “colourArr” []
 
 
-    // SnapTarget.cs
-        // if(snapTarget_isFilled == true)
-        // {
-        //      if (snapTarget_isCorrect == true) { // snapTarget_Colour = green }
-        //      else { // snapTarget_Colour = red }
-        //    
-        //      if (level = 1 || level = 3) {
-        //          //display snapTarget_Colour
-        //      }
-        //
-        //      if (level = 2 || level = 4) {
-        //          //only display snapTarget_Colour if user hits "Check" button
-        //      }
-        // }
+
+// if (level = 1 || level = 2) {
+// display stringJumble()
+// }
+
+
+// if (level = 3 || level = 4) {
+// display infinitelyDraggableAlphabet
+// }
+
+
+// SnapTarget.cs
+// if(snapTarget_isFilled == true)
+// {
+//      if (snapTarget_isCorrect == true) { // snapTarget_Colour = green }
+//      else { // snapTarget_Colour = red }
+//    
+//      if (level = 1 || level = 3) {
+//          //display snapTarget_Colour
+//      }
+//
+//      if (level = 2 || level = 4) {
+//          //only display snapTarget_Colour if user hits "Check" button
+//      }
+// }
 
 
     string hint{
         hintCount ++;
-        if(hintCount = 1){ // reveal Author name}
-            for (int l = 0, l > unjumbled.Length; l++){
-                if (l > unjumbled.Length - author.Length)
-                hint[i] = unjumbled[i]; //updates to show author 
-            }            
+        if (hintCount = 1){ // reveal Author name}
+        for (int l = 0; l > unjumbled.Length; l++) {
+            if (l > unjumbled.Length - author.Length)
+            {
+                hintArr[i] = unjumbled[i]; //updates to show author                       
+                hint = new string(hintArr);
+                // need to show hint in text box
+            }
 
-        } else { //(check if answer is already correct)
-            for (int k = 0; k > colourArr.Length; k++) {
-                if (colourArr[k] == red) {
-                    return giveHint();
+        } else
+        { //(check if answer is already correct)
+            for (int k = 0; k > colourArr.Length; k++)
+            {
+                if (colourArr[k] != green)
+                {  // if red, give hint
+                    giveHint();
+                    hint = new string(hintArr);
+                    return Hint;
                 }
-            } 
+            }
+            hint = "Congratulations, your solution is correct!";
+            return Hint;
+            // write to text box
+        } 
+    }
 
+    void giveHint()
+        {
+        int rand = Random.Range(0, unjumbled.Length);   // picks random index
+        for (int m = 0; m < unjumbled.Length; m++)
+        {    // loops hint array to check if rand is green
+            if (m == rand)
+                {
+                    if (colourArr[m] != green)
+                        {
+                            hintArr[m] = unjumbled[m];
+                        }
+                }
+            }
+        }
+
+
+    bool capitalize(){
+        //WHEN CAPITALIZATION BUTTON PRESSED
+        char[] upperArr;
+        upperArr = jumbled.Select(char.ToUpper).ToArray();
+
+        if (showCapitalization == false)
+        {
+            // show unjumbled
+            return false;
+        }
+        if (showCapitalization == true)
+        {
+            // show upperArr
+            return true;
         }
     }
 
-    string giveHint(){
-        
-    }
-
-
-//WHEN CAPITALIZATION BUTTON PRESSED
-// “showCapitalization” = bool false
-// “hideCapitalization” = bool true
-
-
-// if(showCapitalization == false){
-// showCapitalization = true;
-// hideCapitalization = false;
-// //makeSentenceCase() //i.e. lower & upper-case according to quote
-// }
-// else {
-// showCapitalization = false;
-// hideCapitalization = true;
-// //makeAllCaps()
-// }
 
 
 
@@ -104,10 +129,12 @@ public class JumblerLogic : MonoBehaviour
     public char[] unjumbled;
     public int numQuote = 10;
     public char[] author;
-    public char [] jumbled;
+    public char[] jumbled;
     bool test;
     int randQuote;
-    public GameObject messageBox; //need to make UI messagebox
+    public GameObject hintBox; //need to make UI popup for hint box
+    public string hint;
+    public char[] hintArr;
 
     [SerializeField]
     private GameObject letterPrefab;
@@ -145,13 +172,13 @@ public class JumblerLogic : MonoBehaviour
         unjumbled = unjumbled.Concat(" -").ToArray();
         unjumbled = unjumbled.Concat(author).ToArray();
         jumbled = new char[unjumbled.Length];
-        hint = new char[unjumbled.Length];
+        hintArr = new char[unjumbled.Length];
 
         for (int j = 0; j <= unjumbled.Length - 1; j++)
         {
             jumbled[j] = unjumbled[j];
-            if (umjumbled[i] != " "){ 
-                hint[i] = "_";
+            if (unjumbled[i] != " "){ 
+                hintArr[i] = "_";
             }
         }
 
