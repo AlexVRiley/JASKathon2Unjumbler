@@ -10,26 +10,12 @@ using TMPro;
 using Unity.VisualScripting.FullSerializer;
 using Unity.Burst.CompilerServices;
 
-// Pseudocode for JumblerLogic.cs
-// Written by Justina & K-Lyn Tues. March 31 - Tutorial Time Meeting
-// To be written as real C++ code once UI and logic are linked
-
 
 // "snap_isFilled" bool
 // "snap_isCorrect" bool
-// "snap_Colour" green, red, null
+// "snap_Colour" green, red, default
+// "level" 1, 2, 3, 4
 // “colourArr” []
-
-
-
-// if (level = 1 || level = 2) {
-// display stringJumble()
-// }
-
-
-// if (level = 3 || level = 4) {
-// display infinitelyDraggableAlphabet
-// }
 
 
 // SnapTarget.cs
@@ -91,22 +77,6 @@ using Unity.Burst.CompilerServices;
             }
         }
 
-
-    bool capitalize(){
-        //WHEN CAPITALIZATION BUTTON PRESSED
-        char[] upperArr;
-        upperArr = jumbled.Select(char.ToUpper).ToArray();
-
-        if (showCapitalization == false)
-        {
-            // show unjumbled
-            return false;
-        }
-        if (showCapitalization == true)
-        {
-            // show upperArr
-            return true;
-        }
     }
 */
 
@@ -130,8 +100,11 @@ public class JumblerLogic : MonoBehaviour
     public int numQuote = 10;
     public char[] author;
     public char[] jumbled;
+    public letterPrefab[] letterInstants;
     bool test;
     int randQuote;
+    public bool allCaps = true; //***FOR CAPITALIZATION LOGIC***
+    public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
     public GameObject hintBox; //need to make UI popup for hint box
     public string hint;
     public char[] hintArr;
@@ -147,10 +120,24 @@ public class JumblerLogic : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    void Start()
     {
+
+        // need to input selected level
+
+        if (level = 1 || level = 2) 
+        {
         stringJumble();
-        
+        instantiateDraggableLetters(false);
+        }
+
+        if (level = 3 || level = 4)
+        {
+        instantiateDraggableLetters(true);
+        }
+
+               
+        /*
         bool answer = testAnswer();
         if (answer == true)
         {
@@ -159,10 +146,7 @@ public class JumblerLogic : MonoBehaviour
         else
         {
             System.Console.WriteLine("Sorry, Try Again!");
-        }
-
-        instantiateDraggableLetters();
-        instantiateSnapTarget();
+        }*/
 
     }
     void stringJumble()
@@ -195,8 +179,11 @@ public class JumblerLogic : MonoBehaviour
             }
             
         }
+
+        upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
     }
 
+    /*
     //test if full answer is correct
     bool testAnswer()
     {
@@ -210,34 +197,67 @@ public class JumblerLogic : MonoBehaviour
         }
         return true;
     }
+    */
 
-    public void instantiateDraggableLetters()
+    public void instantiateDraggableLetters(bool infiniteAlphabet)
+    // Initially instantiates all draggable letters as capital letters
     {
-        for (int x = 0; x < unjumbled.Length; x++)
-        {
-            GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
-            instance.name = "Letter " + x;
-
-            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
-            textComponent.text = jumbled[x].ToString();
-
-          
+        if (infiniteAlphabet == false) {
+        // Display jumbled letters
+            for (int x = 0; x < jumbled.Length - 1; x++)
+            {
+                Instantiate(letterPrefab, letterSpawn.transform, true);
+                letterPrefab.name = "Letter " + x;
+                letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
+                letterInstants[x] = letterPrefab;
+            }
         }
+
+        else
+        // Display alphabet
+        {
+            char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.',;:".ToCharArray();
+            for (int x = 0; x < alphabet - 1; x++)
+            {
+                Instantiate(letterPrefab, letterSpawn.transform, true);
+                letterPrefab.name = "Letter " + x;
+                letterPrefab.GetComponentInChildren<TMP_Text>().text = alphabet[x].ToString();
+                letterInstants[x] = letterPrefab;
+            }
+        }
+
     }
+
+    public void changeCapitalization()
+    // Called when either the "Show Capitalization" or "Hide Capitalization" button is pressed by user
+    {
+        if (allCaps == true)
+        {
+            for (int x = 0; x < letterInstants.Length - 1; x++)
+            {
+                letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString();
+            }
+            allCaps = false;
+        }
+
+        if (allCaps == false)
+        {
+                for (int x = 0; x < letterInstants.Length - 1; x++)
+            {
+                letterPrefab.GetComponentInChildren<TMP_Text>().text = upperArr[x].ToString();
+            }
+            allCaps = true;
+        }
+
+    }
+
     public void instantiateSnapTarget()
     {
-        for (int x = 0; x < unjumbled.Length; x++)
+        for (int x = 0; x < unjumbled.Length - 1; x++)
         {
-            GameObject instance = Instantiate(snapPrefab, snapSpawn.transform, true);
-            instance.name = "Target " + x;
-
-            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
-            textComponent.text = unjumbled[x].ToString();
-
-            if (string.IsNullOrWhiteSpace(textComponent.text))
-            {
-                instance.GetComponent<CanvasRenderer>().SetAlpha(0);
-            }
+            Instantiate(snapPrefab, snapSpawn.transform, true);
+            snapPrefab.name = "Target " + x;
+            snapPrefab.GetComponentInChildren<TMP_Text>().text = unjumbled[x].ToString();
         }
     }
 }
