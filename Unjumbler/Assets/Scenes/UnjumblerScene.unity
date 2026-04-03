@@ -2091,8 +2091,8 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 29, y: 29}
   m_Spacing: {x: 11, y: 11}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 22
 --- !u!1 &1121039447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2882,6 +2882,7 @@ MonoBehaviour:
   numQuote: 10
   author: 
   jumbled: 
+  targetMaxChar: 22
   letterPrefab: {fileID: 6634253804874498004, guid: 6edcf209ddbd2d94d8fd8df63eb2b93c, type: 3}
   letterSpawn: {fileID: 2022491868}
   snapPrefab: {fileID: 7030445949828445410, guid: 9c56f52b6b4a20d49b4fab6f62c3ca44, type: 3}
