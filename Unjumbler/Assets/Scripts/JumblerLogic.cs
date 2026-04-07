@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting.FullSerializer;
+using Unity.Burst.CompilerServices;
 
 
 public class JumblerLogic : MonoBehaviour
@@ -26,8 +28,18 @@ public class JumblerLogic : MonoBehaviour
     public char[] unjumbled;
     public int numQuote = 10;
     public char[] author;
-    public char [] jumbled;
-    bool test;
+    public char[] jumbled;
+    public GameObject[] letterInstants; // changed to gameobject array 
+    int randQuote;
+    public bool allCaps = true; //***FOR CAPITALIZATION LOGIC***
+    public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
+    public GameObject hintBox; //need to make UI popup for hint box
+    public string hintStr;
+    public char[] hintArr;
+    public SnapTarget checkTarget;
+    public string[] colourArr;
+    public int level;
+    public int hintCount = 0;
 
     public int targetMaxChar;
 
@@ -42,36 +54,40 @@ public class JumblerLogic : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    void Start()
     {
+
+        // ***************need to input selected level*********************
+
+        if (level == 1 || level == 2) 
+        {
         stringJumble();
-        
-        bool answer = testAnswer();
-        if (answer == true)
-        {
-            System.Console.WriteLine("You Win!");
-        }
-        else
-        {
-            System.Console.WriteLine("Sorry, Try Again!");
+        instantiateDraggableLetters(false);
         }
 
-        instantiateDraggableLetters();
-        instantiateSnapTarget();
+        if (level == 3 || level == 4)
+        {
+        instantiateDraggableLetters(true);
+        }
 
     }
+
     void stringJumble()
     {
-        int randQuote = Random.Range(0,numQuote);   //picks random quote and author number
+        randQuote = Random.Range(0,numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
         author = person[randQuote].ToCharArray();
         unjumbled = unjumbled.Concat(" -").ToArray();
         unjumbled = unjumbled.Concat(author).ToArray();
         jumbled = new char[unjumbled.Length];
+        hintArr = new char[unjumbled.Length];
 
         for (int j = 0; j <= unjumbled.Length - 1; j++)
         {
             jumbled[j] = unjumbled[j];
+            if (unjumbled[j] != ' '){ 
+                hintArr[j] = '_';
+            }
         }
 
         //jumbles array
@@ -86,36 +102,83 @@ public class JumblerLogic : MonoBehaviour
             }
             
         }
+
+        upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
     }
 
-    //test if full answer is correct
-    bool testAnswer()
+    public void instantiateDraggableLetters(bool infiniteAlphabet)
+    // Initially instantiates all draggable letters as capital letters
     {
-        test = false;
-        for(int i = 0; i < unjumbled.Length; i++)
-        {
-            if (unjumbled[i] != jumbled[i])
+        if (infiniteAlphabet == false) {
+        // Display jumbled letters
+            for (int x = 0; x < jumbled.Length; x++)
             {
-                return false;
+                Instantiate(letterPrefab, letterSpawn.transform, true);
+                letterPrefab.name = "Letter " + x;
+                letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
+                letterInstants[x] = letterPrefab;
             }
         }
-        return true;
+
+        else
+        // Display alphabet
+        {
+            char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.',;:".ToCharArray();
+            for (int x = 0; x < alphabet.Length; x++)
+            {
+                Instantiate(letterPrefab, letterSpawn.transform, true);
+                letterPrefab.name = "Letter " + x;
+                letterPrefab.GetComponentInChildren<TMP_Text>().text = alphabet[x].ToString();
+                letterInstants[x] = letterPrefab;
+            }
+        }
+
     }
 
+    public void changeCapitalization()
+    // Called when either the "Show Capitalization" or "Hide Capitalization" button is pressed by user
     /* Here we instantiate the Letters that will be used by the user
      * Each letter contains a text child element to compare when dropped
      * in the snapTarget Script. */
     public void instantiateDraggableLetters()
     {
-        for (int x = 0; x < unjumbled.Length; x++)
+        if (allCaps == true)
         {
+            for (int x = 0; x < letterInstants.Length; x++)
+            {
+                letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString();
+            }
+            allCaps = false;
+        }
+
+        if (allCaps == false)
+        {
+                for (int x = 0; x < letterInstants.Length; x++)
+            {
+                letterPrefab.GetComponentInChildren<TMP_Text>().text = upperArr[x].ToString();
+            }
+            allCaps = true;
             GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
             instance.name = "Letter " + x;
 
             TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
             textComponent.text = jumbled[x].ToString();
         }
+
     }
+
+    public void instantiateSnapTarget()
+    {
+        for (int x = 0; x < unjumbled.Length - 1; x++)
+        {
+            Instantiate(snapPrefab, snapSpawn.transform, true);
+            snapPrefab.name = "Target " + x;
+            snapPrefab.GetComponentInChildren<TMP_Text>().text = unjumbled[x].ToString();
+        }
+    }
+
+    public void checkAnswer()
+    // Called when the "Check Attempt" button is pressed by user
     /* To format the snapTargets (blanks) properly without cutting off the words in the
      * grid layout group we need to be able to detect if the next word instantiating is
      * longer than the total length of the line we are on. */
@@ -176,12 +239,19 @@ public class JumblerLogic : MonoBehaviour
             GameObject instance = Instantiate(snapPrefab, snapSpawn.transform, true);
             instance.name = "Target " + x;
 
-            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
-            textComponent.text = unjumbled[x].ToString();
+    {
+        checkTarget = FindAnyObjectByType<SnapTarget>();
+        colourArr = checkTarget.colourArr;
 
-            if (string.IsNullOrWhiteSpace(textComponent.text))
+        for (int i = 0; i < colourArr.Length; i++)
+        {
+            if (colourArr[i] == "green")
             {
-                instance.GetComponent<CanvasRenderer>().SetAlpha(0);
+                // turn that letter's colour green
+            }
+            if (colourArr[i] == "red")
+            {
+                // turn that letter's colour red
             }
 
             // We keep track of our positon on the grid.
@@ -193,6 +263,62 @@ public class JumblerLogic : MonoBehaviour
         }
 
     }
+
+
+    public string hint() 
+        {
+        // Get the reference to the script
+        checkTarget = FindAnyObjectByType<SnapTarget>();
+
+        // Point localReference to the same array in ScriptA
+        colourArr = checkTarget.colourArr;
+
+        hintCount ++;
+        if (hintCount == 1){ // reveal Author name}
+            for (int l = 0; l > unjumbled.Length; l++)
+            {
+                if (l > unjumbled.Length - author.Length)
+                {
+                    hintArr[l] = unjumbled[l]; //updates to show author                       
+                    
+                    // need to show hint in text box
+                }
+            }
+            hintStr = new string(hintArr);
+            return hintStr;
+
+        } else
+        { //(check if answer is already correct)
+            for (int k = 0; k > colourArr.Length; k++)
+            {
+                if (colourArr[k] != "green")
+                {  // if red, give hint
+                    giveHint();
+                    return hintStr;
+                }
+            }
+            hintStr = "Congratulations, your solution is correct!";
+            return hintStr;
+            // write to text box
+        } 
+    }
+    public string giveHint()
+    {
+        int rand = Random.Range(0, unjumbled.Length);   // picks random index
+        for (int m = 0; m < unjumbled.Length; m++)
+        {    // loops hint array to check if rand is green
+            if (m == rand)
+            {
+                if (colourArr[m] != "green")
+                {
+                    hintArr[m] = unjumbled[m];
+                }
+            }
+        }
+        hintStr = new string(hintArr);
+        return hintStr;
+    }
+
 }
-   
- 
+
+
