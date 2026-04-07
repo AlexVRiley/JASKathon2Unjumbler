@@ -187,28 +187,26 @@ public class JumblerLogic : MonoBehaviour
             GameObject instance = Instantiate(snapPrefab, snapSpawn.transform, true);
             instance.name = "Target " + x;
 
+
+            checkTarget = FindAnyObjectByType<SnapTarget>();
+            colourArr = checkTarget.colourArr;
+
+            for (int i = 0; i < colourArr.Length; i++)
             {
-                checkTarget = FindAnyObjectByType<SnapTarget>();
-                colourArr = checkTarget.colourArr;
-
-                for (int i = 0; i < colourArr.Length; i++)
+                if (colourArr[i] == "green")
                 {
-                    if (colourArr[i] == "green")
-                    {
-                        // turn that letter's colour green
-                    }
-                    if (colourArr[i] == "red")
-                    {
-                        // turn that letter's colour red
-                    }
-
-                    // We keep track of our positon on the grid.
-                    row++;
-                    if (row >= targetMaxChar)
-                    {
-                        row = 0;
-                    }
+                    // turn that letter's colour green
                 }
+                if (colourArr[i] == "red")
+                {
+                    // turn that letter's colour red
+                }
+            }
+            // We keep track of our positon on the grid.
+            row++;
+            if (row >= targetMaxChar)
+            {
+                row = 0;
             }
         }
     }
