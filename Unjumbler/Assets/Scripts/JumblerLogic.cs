@@ -92,10 +92,9 @@ public class JumblerLogic : MonoBehaviour
         // Display jumbled letters
             for (int x = 0; x < jumbled.Length; x++)
             {
-                Instantiate(letterPrefab, letterSpawn.transform, true);
-                letterPrefab.name = "Letter " + x;
-                letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
-                letterInstants[x] = letterPrefab;
+                GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+                instance.name = "Letter " + x;
+                instance.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
             }
         }
 
@@ -105,10 +104,9 @@ public class JumblerLogic : MonoBehaviour
             char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.',;:".ToCharArray();
             for (int x = 0; x < alphabet.Length; x++)
             {
-                Instantiate(letterPrefab, letterSpawn.transform, true);
-                letterPrefab.name = "Letter " + x;
-                letterPrefab.GetComponentInChildren<TMP_Text>().text = alphabet[x].ToString();
-                letterInstants[x] = letterPrefab;
+                GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+                instance.name = "Letter " + x;
+                instance.GetComponentInChildren<TMP_Text>().text = alphabet[x].ToString();
             }
         }
 
@@ -122,33 +120,7 @@ public class JumblerLogic : MonoBehaviour
     /* Here we instantiate the Letters that will be used by the user
      * Each letter contains a text child element to compare when dropped
      * in the snapTarget Script. */
-    public void instantiateDraggableLetters()
-    {
-        if (allCaps == true)
-        {
-            for (int x = 0; x < letterInstants.Length; x++)
-            {
-                letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString();
-            }
-            allCaps = false;
-        }
-
-        if (allCaps == false)
-        {
-            for (int x = 0; x < letterInstants.Length; x++)
-            {
-                letterPrefab.GetComponentInChildren<TMP_Text>().text = upperArr[x].ToString();
-
-                allCaps = true;
-                GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
-                instance.name = "Letter " + x;
-
-                TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
-                textComponent.text = jumbled[x].ToString();
-            }
-        }
-
-    }
+    
 
     public void checkAnswer()
     {

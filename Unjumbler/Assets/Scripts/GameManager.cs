@@ -8,23 +8,33 @@ public class GameManager : MonoBehaviour
     {
         jumbler.stringJumble();
         jumbler.instantiateDraggableLetters(false);
+        jumbler.instantiateSnapTarget();
     }
 
     public void Medium()
     {
         jumbler.stringJumble();
         jumbler.instantiateDraggableLetters(false);
+        jumbler.instantiateSnapTarget();
     }
 
     public void Hard()
     {
         jumbler.stringJumble();
         jumbler.instantiateDraggableLetters(true);
+        jumbler.instantiateSnapTarget();
     }
 
     public void Expert()
     {
         jumbler.stringJumble();
         jumbler.instantiateDraggableLetters(true);
+        jumbler.instantiateSnapTarget();
     }
+
+    //TODO:
+    /* -Old letters removed on moving back to main menu
+     * -Upper and lower case button linked to logic 
+     * -Check button needs to be linked to logic 
+     * -Hint Button linked to logic */
 }
