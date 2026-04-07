@@ -41,6 +41,8 @@ public class JumblerLogic : MonoBehaviour
     public int level;
     public int hintCount = 0;
 
+    public int targetMaxChar;
+
     [SerializeField]
     private GameObject letterPrefab;
     [SerializeField]
@@ -135,6 +137,10 @@ public class JumblerLogic : MonoBehaviour
 
     public void changeCapitalization()
     // Called when either the "Show Capitalization" or "Hide Capitalization" button is pressed by user
+    /* Here we instantiate the Letters that will be used by the user
+     * Each letter contains a text child element to compare when dropped
+     * in the snapTarget Script. */
+    public void instantiateDraggableLetters()
     {
         if (allCaps == true)
         {
@@ -152,6 +158,11 @@ public class JumblerLogic : MonoBehaviour
                 letterPrefab.GetComponentInChildren<TMP_Text>().text = upperArr[x].ToString();
             }
             allCaps = true;
+            GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+            instance.name = "Letter " + x;
+
+            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
+            textComponent.text = jumbled[x].ToString();
         }
 
     }
@@ -168,6 +179,65 @@ public class JumblerLogic : MonoBehaviour
 
     public void checkAnswer()
     // Called when the "Check Attempt" button is pressed by user
+    /* To format the snapTargets (blanks) properly without cutting off the words in the
+     * grid layout group we need to be able to detect if the next word instantiating is
+     * longer than the total length of the line we are on. */
+    public void instantiateSnapTarget()
+    {
+        int row = 0;
+
+        for (int x = 0; x< unjumbled.Length; x++)
+        {
+            /* If the first character in a row is a space skip it. We do this by setting the 
+             * object inactive in the scene so we can still see the space in the hierarchy */
+            if (row == 0 && unjumbled[x] == ' ')
+            {
+                GameObject skipInstance = Instantiate(snapPrefab, snapSpawn.transform, true);
+                skipInstance.name = "Target " + x;
+
+                TMP_Text skipText = skipInstance.GetComponentInChildren<TMP_Text>();
+                skipText.text = unjumbled[x].ToString();
+
+                skipInstance.SetActive(false); // set it inactive so it doesn't affect the layout
+
+                continue;
+            }
+            // Check to see how long a word is if we are at the start.
+            if (x == 0 || unjumbled[x - 1] == ' ')
+            {
+                int wordLength = 0;
+                int temp = x;
+
+                // We count until we hit a space.
+                while (temp < unjumbled.Length && unjumbled[temp] != ' ')
+                {
+                    wordLength++;
+                    temp++;
+                }
+
+                /* Here we are checking if the current word being instantiated doesn't fit on 
+                 * the current row and if it doesn't we move it to the next row by instantiating
+                 * more blanks. */
+                if (row + wordLength > targetMaxChar && row > 0)
+                {
+                    int padding = targetMaxChar - row;
+                    for (int i = 0; i < padding; i++)
+                    {
+                        GameObject pad = Instantiate(snapPrefab, snapSpawn.transform, true);
+                        pad.name = "Padding";
+
+                        TMP_Text padText = pad.GetComponentInChildren<TMP_Text>();
+                        padText.text = " ";
+                        pad.GetComponent<CanvasRenderer>().SetAlpha(0);
+                    }
+                    row = 0; // Resets the row when we wrap to the next line.
+                }
+            }
+
+            /* Here we instantiate the snapTargets that will be used by the user contaning the text
+             * we need to compare when a user snaps a letter. */
+            GameObject instance = Instantiate(snapPrefab, snapSpawn.transform, true);
+            instance.name = "Target " + x;
 
     {
         checkTarget = FindAnyObjectByType<SnapTarget>();
@@ -183,7 +253,15 @@ public class JumblerLogic : MonoBehaviour
             {
                 // turn that letter's colour red
             }
+
+            // We keep track of our positon on the grid.
+            row++;
+            if (row >= targetMaxChar)
+            {
+                row = 0;
+            }
         }
+
     }
 
 
