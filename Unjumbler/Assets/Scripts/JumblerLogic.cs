@@ -187,6 +187,13 @@ public class JumblerLogic : MonoBehaviour
             GameObject instance = Instantiate(snapPrefab, snapSpawn.transform, true);
             instance.name = "Target " + x;
 
+            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
+            textComponent.text = unjumbled[x].ToString();
+
+            if (string.IsNullOrWhiteSpace(textComponent.text))
+            {
+                instance.GetComponent<CanvasRenderer>().SetAlpha(0);
+            }
 
             checkTarget = FindAnyObjectByType<SnapTarget>();
             colourArr = checkTarget.colourArr;

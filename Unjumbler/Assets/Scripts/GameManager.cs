@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    public JumblerLogic jumbler;
+    private JumblerLogic jumbler;
     public void Easy()
     {
         jumbler.stringJumble();
