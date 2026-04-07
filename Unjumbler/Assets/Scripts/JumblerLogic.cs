@@ -37,8 +37,9 @@ public class JumblerLogic : MonoBehaviour
     public string hintStr;
     public char[] hintArr;
     public SnapTarget checkTarget;
-    public string[] colourArray;
+    public string[] colourArr;
     public int level;
+    public int hintCount = 0;
 
     [SerializeField]
     private GameObject letterPrefab;
@@ -82,8 +83,8 @@ public class JumblerLogic : MonoBehaviour
         for (int j = 0; j <= unjumbled.Length - 1; j++)
         {
             jumbled[j] = unjumbled[j];
-            if (unjumbled[i] != ' '){ 
-                hintArr[i] = '_';
+            if (unjumbled[j] != ' '){ 
+                hintArr[j] = '_';
             }
         }
 
@@ -121,7 +122,7 @@ public class JumblerLogic : MonoBehaviour
         // Display alphabet
         {
             char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.',;:".ToCharArray();
-            for (int x = 0; x < alphabet; x++)
+            for (int x = 0; x < alphabet.Length; x++)
             {
                 Instantiate(letterPrefab, letterSpawn.transform, true);
                 letterPrefab.name = "Letter " + x;
@@ -173,11 +174,11 @@ public class JumblerLogic : MonoBehaviour
         
         for(int i = 0; i < colourArr.Length; i++)
         {
-            if (i = 'green')
+            if (colourArr[i] == "green")
             {
                 // turn that letter's colour green
             }
-            if (i = 'red')
+            if (colourArr[i] == "red")
             {
                 // turn that letter's colour red
             }
@@ -188,12 +189,12 @@ public class JumblerLogic : MonoBehaviour
     public string hint() 
         {
         // Get the reference to the script
-        checkTarget = FindObjectOfType<SnapTarget>();
+        checkTarget = FindAnyObjectByType<SnapTarget>();
 
         // Point localReference to the same array in ScriptA
-        colourArray = checkTarget.colourArr;
+        colourArr = checkTarget.colourArr;
         hintCount ++;
-        if (hintCount = 1){ // reveal Author name}
+        if (hintCount == 1){ // reveal Author name}
             for (int l = 0; l > unjumbled.Length; l++)
             {
                 if (l > unjumbled.Length - author.Length)
@@ -217,7 +218,7 @@ public class JumblerLogic : MonoBehaviour
                 }
             }
             hintStr = "Congratulations, your solution is correct!";
-            return hintstr;
+            return hintStr;
             // write to text box
         } 
     }
@@ -235,7 +236,7 @@ public class JumblerLogic : MonoBehaviour
             }
         }
         hintStr = new string(hintArr);
-
+        return hintStr;
     }
 
 }

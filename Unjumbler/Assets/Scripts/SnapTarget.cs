@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public string snap_Colour;
-public string[] colourArr; //JumblerLogic will reference this array
+
 
 public class SnapTarget : MonoBehaviour, IDropHandler
 {
+    public string snap_Colour;
+    public string[] colourArr; //JumblerLogic will reference this array
     private TMP_Text snapLetterText;
 
     /* When the user ends their drag on a draggable object we check the following: */
