@@ -10,30 +10,6 @@ using TMPro;
 using Unity.VisualScripting.FullSerializer;
 using Unity.Burst.CompilerServices;
 
-
-// "snap_isFilled" bool
-// "snap_isCorrect" bool
-// "snap_Colour" green, red, default
-// "level" 1, 2, 3, 4
-// “colourArr” []
-
-
-// SnapTarget.cs
-// if(snapTarget_isFilled == true)
-// {
-//      if (snapTarget_isCorrect == true) { // snapTarget_Colour = green }
-//      else { // snapTarget_Colour = red }
-//    
-//      if (level = 1 || level = 3) {
-//          //display snapTarget_Colour
-//      }
-//
-//      if (level = 2 || level = 4) {
-//          //only display snapTarget_Colour if user hits "Check" button
-//      }
-// }
-
-
 /*    string hint{
         hintCount ++;
         if (hintCount = 1){ // reveal Author name}
@@ -80,8 +56,6 @@ using Unity.Burst.CompilerServices;
     }
 */
 
-
-
 public class JumblerLogic : MonoBehaviour
 {
     public string[] quotes = new [] {"We can only see a short distance ahead, but we " +
@@ -101,7 +75,6 @@ public class JumblerLogic : MonoBehaviour
     public char[] author;
     public char[] jumbled;
     public letterPrefab[] letterInstants;
-    bool test;
     int randQuote;
     public bool allCaps = true; //***FOR CAPITALIZATION LOGIC***
     public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
@@ -123,7 +96,7 @@ public class JumblerLogic : MonoBehaviour
     void Start()
     {
 
-        // need to input selected level
+        // ***************need to input selected level*********************
 
         if (level = 1 || level = 2) 
         {
@@ -136,19 +109,8 @@ public class JumblerLogic : MonoBehaviour
         instantiateDraggableLetters(true);
         }
 
-               
-        /*
-        bool answer = testAnswer();
-        if (answer == true)
-        {
-            System.Console.WriteLine("You Win!");
-        }
-        else
-        {
-            System.Console.WriteLine("Sorry, Try Again!");
-        }*/
-
     }
+
     void stringJumble()
     {
         randQuote = Random.Range(0,numQuote);   //picks random quote and author number
@@ -183,28 +145,12 @@ public class JumblerLogic : MonoBehaviour
         upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
     }
 
-    /*
-    //test if full answer is correct
-    bool testAnswer()
-    {
-        test = false;
-        for(int i = 0; i < unjumbled.Length; i++)
-        {
-            if (unjumbled[i] != jumbled[i])
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    */
-
     public void instantiateDraggableLetters(bool infiniteAlphabet)
     // Initially instantiates all draggable letters as capital letters
     {
         if (infiniteAlphabet == false) {
         // Display jumbled letters
-            for (int x = 0; x < jumbled.Length - 1; x++)
+            for (int x = 0; x < jumbled.Length; x++)
             {
                 Instantiate(letterPrefab, letterSpawn.transform, true);
                 letterPrefab.name = "Letter " + x;
@@ -217,7 +163,7 @@ public class JumblerLogic : MonoBehaviour
         // Display alphabet
         {
             char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.',;:".ToCharArray();
-            for (int x = 0; x < alphabet - 1; x++)
+            for (int x = 0; x < alphabet; x++)
             {
                 Instantiate(letterPrefab, letterSpawn.transform, true);
                 letterPrefab.name = "Letter " + x;
@@ -233,7 +179,7 @@ public class JumblerLogic : MonoBehaviour
     {
         if (allCaps == true)
         {
-            for (int x = 0; x < letterInstants.Length - 1; x++)
+            for (int x = 0; x < letterInstants.Length; x++)
             {
                 letterPrefab.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString();
             }
@@ -242,7 +188,7 @@ public class JumblerLogic : MonoBehaviour
 
         if (allCaps == false)
         {
-                for (int x = 0; x < letterInstants.Length - 1; x++)
+                for (int x = 0; x < letterInstants.Length; x++)
             {
                 letterPrefab.GetComponentInChildren<TMP_Text>().text = upperArr[x].ToString();
             }
@@ -260,6 +206,27 @@ public class JumblerLogic : MonoBehaviour
             snapPrefab.GetComponentInChildren<TMP_Text>().text = unjumbled[x].ToString();
         }
     }
+
+    public void checkAnswer()
+    // Called when the "Check Attempt" button is pressed by user
+
+    // ***************need colourArr from SnapTarget.cs*********************
+
+    {
+      for(int i = 0; i < colourArr.Length; i++)
+      {
+        if (i = 'green')
+        {
+            // turn that letter's colour green
+        }
+        if (i = 'red')
+        {
+            // turn that letter's colour red
+        }
+      }
+    }
+
+
 }
    
  

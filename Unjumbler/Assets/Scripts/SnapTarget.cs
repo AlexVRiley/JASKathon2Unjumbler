@@ -2,6 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
+public bool snap_isFilled = false;
+public bool snap_isCorrect = false;
+public string snap_Colour;
+public string[] colourArr;
+
 public class SnapTarget : MonoBehaviour, IDropHandler
 {
     private TMP_Text snapLetterText;
@@ -20,11 +25,14 @@ public class SnapTarget : MonoBehaviour, IDropHandler
 
             /* Now we just set the dragged objects position to the DropTargets */
             draggedRectTransform.position = dropTargetRectTransform.position;
+
+            snap_isFilled = true;
+            /* Compare draggedItem's letter to the SnapTarget's letter */
+            // if correct: snap_Colour = 'green'
+            // if incorrect: snap_Colour = 'red'
+            // if (level = 1 || level = 3) display this colour immediately
+            // else just store the colour in colourArr and display the default colour
+
         }
     }
-
-    /* TODO
-     * - Add Variables to compare DraggedLetter's letter to the SnapTargets Letter
-     * - Add Check for if the compared letter is correct
-     */
 }
