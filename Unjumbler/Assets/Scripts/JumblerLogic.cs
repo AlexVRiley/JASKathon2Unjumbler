@@ -210,20 +210,20 @@ public class JumblerLogic : MonoBehaviour
     public void checkAnswer()
     // Called when the "Check Attempt" button is pressed by user
 
-    // ***************need colourArr from SnapTarget.cs*********************
-
     {
-      for(int i = 0; i < colourArr.Length; i++)
-      {
-        if (i = 'green')
+        SnapTarget checkTarget = colourArr<SnapTarget>(); // retrieve colourArr from SnapTarget
+        
+        for(int i = 0; i < colourArr.Length; i++)
         {
-            // turn that letter's colour green
+            if (i = 'green')
+            {
+                // turn that letter's colour green
+            }
+            if (i = 'red')
+            {
+                // turn that letter's colour red
+            }
         }
-        if (i = 'red')
-        {
-            // turn that letter's colour red
-        }
-      }
     }
 
 
