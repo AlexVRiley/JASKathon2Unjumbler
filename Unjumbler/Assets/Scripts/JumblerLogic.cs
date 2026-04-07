@@ -13,7 +13,7 @@ using Unity.Burst.CompilerServices;
 
 public class JumblerLogic : MonoBehaviour
 {
-    public string[] quotes = new [] {"We can only see a short distance ahead, but we " +
+    public string[] quotes = new[] {"We can only see a short distance ahead, but we " +
         "can see plenty there that needs to be done.", "That brain of mine is something " +
         "more than merely mortal; as time will show.", "The most dangerous phrase in the language is, 'We've always done it this way'.", "Hope and curiosity about the future seemed better " +
         "than guarantees", "In mathematics you don't understand things. You just get used to them.",
@@ -24,7 +24,7 @@ public class JumblerLogic : MonoBehaviour
     public string[] person = new[] {"Alan Turing", "Ada Lovelace", "Grace Hopper",
         "Hedy Lamarr", "John von Neumann", "Katherin Johnson", "Sister Mary Kenneth Keller",
         "Leonhard Euler", "Radia Perlman", "Mary Allen Wilkes"};
-    
+
     public char[] unjumbled;
     public int numQuote = 10;
     public char[] author;
@@ -38,7 +38,6 @@ public class JumblerLogic : MonoBehaviour
     public char[] hintArr;
     public SnapTarget checkTarget;
     public string[] colourArr;
-    public int level;
     public int hintCount = 0;
 
     public int targetMaxChar;
@@ -52,27 +51,7 @@ public class JumblerLogic : MonoBehaviour
     [SerializeField]
     private GameObject snapSpawn;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-        // ***************need to input selected level*********************
-
-        if (level == 1 || level == 2) 
-        {
-        stringJumble();
-        instantiateDraggableLetters(false);
-        }
-
-        if (level == 3 || level == 4)
-        {
-        instantiateDraggableLetters(true);
-        }
-
-    }
-
-    void stringJumble()
+    public void stringJumble()
     {
         randQuote = Random.Range(0,numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
