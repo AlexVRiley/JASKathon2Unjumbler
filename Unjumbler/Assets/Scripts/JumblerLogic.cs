@@ -38,24 +38,6 @@ using Unity.Burst.CompilerServices;
         } 
     }
 
-    void giveHint()
-        {
-        int rand = Random.Range(0, unjumbled.Length);   // picks random index
-        for (int m = 0; m < unjumbled.Length; m++)
-        {    // loops hint array to check if rand is green
-            if (m == rand)
-                {
-                    if (colourArr[m] != green)
-                        {
-                            hintArr[m] = unjumbled[m];
-                        }
-                }
-            }
-        }
-
-    }
-*/
-
 public class JumblerLogic : MonoBehaviour
 {
     public string[] quotes = new [] {"We can only see a short distance ahead, but we " +
