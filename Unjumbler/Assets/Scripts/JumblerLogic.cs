@@ -136,6 +136,9 @@ public class JumblerLogic : MonoBehaviour
     }
 
     public void changeCapitalization()
+    {
+
+    }
     // Called when either the "Show Capitalization" or "Hide Capitalization" button is pressed by user
     /* Here we instantiate the Letters that will be used by the user
      * Each letter contains a text child element to compare when dropped
@@ -153,31 +156,25 @@ public class JumblerLogic : MonoBehaviour
 
         if (allCaps == false)
         {
-                for (int x = 0; x < letterInstants.Length; x++)
+            for (int x = 0; x < letterInstants.Length; x++)
             {
                 letterPrefab.GetComponentInChildren<TMP_Text>().text = upperArr[x].ToString();
+
+                allCaps = true;
+                GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+                instance.name = "Letter " + x;
+
+                TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
+                textComponent.text = jumbled[x].ToString();
             }
-            allCaps = true;
-            GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
-            instance.name = "Letter " + x;
-
-            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
-            textComponent.text = jumbled[x].ToString();
         }
 
-    }
-
-    public void instantiateSnapTarget()
-    {
-        for (int x = 0; x < unjumbled.Length - 1; x++)
-        {
-            Instantiate(snapPrefab, snapSpawn.transform, true);
-            snapPrefab.name = "Target " + x;
-            snapPrefab.GetComponentInChildren<TMP_Text>().text = unjumbled[x].ToString();
-        }
     }
 
     public void checkAnswer()
+    {
+
+    }
     // Called when the "Check Attempt" button is pressed by user
     /* To format the snapTargets (blanks) properly without cutting off the words in the
      * grid layout group we need to be able to detect if the next word instantiating is
@@ -186,7 +183,7 @@ public class JumblerLogic : MonoBehaviour
     {
         int row = 0;
 
-        for (int x = 0; x< unjumbled.Length; x++)
+        for (int x = 0; x < unjumbled.Length; x++)
         {
             /* If the first character in a row is a space skip it. We do this by setting the 
              * object inactive in the scene so we can still see the space in the hierarchy */
@@ -239,34 +236,34 @@ public class JumblerLogic : MonoBehaviour
             GameObject instance = Instantiate(snapPrefab, snapSpawn.transform, true);
             instance.name = "Target " + x;
 
-    {
-        checkTarget = FindAnyObjectByType<SnapTarget>();
-        colourArr = checkTarget.colourArr;
+            {
+                checkTarget = FindAnyObjectByType<SnapTarget>();
+                colourArr = checkTarget.colourArr;
 
-        for (int i = 0; i < colourArr.Length; i++)
-        {
-            if (colourArr[i] == "green")
-            {
-                // turn that letter's colour green
-            }
-            if (colourArr[i] == "red")
-            {
-                // turn that letter's colour red
-            }
+                for (int i = 0; i < colourArr.Length; i++)
+                {
+                    if (colourArr[i] == "green")
+                    {
+                        // turn that letter's colour green
+                    }
+                    if (colourArr[i] == "red")
+                    {
+                        // turn that letter's colour red
+                    }
 
-            // We keep track of our positon on the grid.
-            row++;
-            if (row >= targetMaxChar)
-            {
-                row = 0;
+                    // We keep track of our positon on the grid.
+                    row++;
+                    if (row >= targetMaxChar)
+                    {
+                        row = 0;
+                    }
+                }
             }
         }
-
     }
 
-
     public string hint() 
-        {
+    {
         // Get the reference to the script
         checkTarget = FindAnyObjectByType<SnapTarget>();
 
