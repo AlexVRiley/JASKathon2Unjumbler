@@ -29,7 +29,7 @@ public class JumblerLogic : MonoBehaviour
     public int numQuote = 10;
     public char[] author;
     public char[] jumbled;
-    public letterPrefab[] letterInstants;
+    public GameObject[] letterInstants; // changed to gameobject array 
     int randQuote;
     public bool allCaps = true; //***FOR CAPITALIZATION LOGIC***
     public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
@@ -170,9 +170,10 @@ public class JumblerLogic : MonoBehaviour
     // Called when the "Check Attempt" button is pressed by user
 
     {
-        SnapTarget checkTarget = colourArr<SnapTarget>(); // retrieve colourArr from SnapTarget
-        
-        for(int i = 0; i < colourArr.Length; i++)
+        checkTarget = FindAnyObjectByType<SnapTarget>();
+        colourArr = checkTarget.colourArr;
+
+        for (int i = 0; i < colourArr.Length; i++)
         {
             if (colourArr[i] == "green")
             {
@@ -193,6 +194,7 @@ public class JumblerLogic : MonoBehaviour
 
         // Point localReference to the same array in ScriptA
         colourArr = checkTarget.colourArr;
+
         hintCount ++;
         if (hintCount == 1){ // reveal Author name}
             for (int l = 0; l > unjumbled.Length; l++)
