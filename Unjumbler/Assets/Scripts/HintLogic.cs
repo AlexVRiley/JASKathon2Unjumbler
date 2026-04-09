@@ -16,14 +16,22 @@ public class HintLogic : MonoBehaviour
     public int hintCount = 0;
 
 
-    public string hint()
+    private void Start()
     {
+        hintBox = Instantiate(hintBox);
         // Get the reference to the script
+        jumbler = FindAnyObjectByType<JumblerLogic>();
         checkTarget = FindAnyObjectByType<SnapTarget>();
 
         // Point localReference to the same array in ScriptA
         colourArr = checkTarget.colourArr;
-
+        unjumbled = jumbler.unjumbled;
+        author = jumbler.author;
+        hintStr = jumbler.hintStr;
+        colourArr = jumbler.colourArr;
+    }
+    public string hint()
+    {
         hintCount++;
         if (hintCount == 1)
         { // reveal Author name}
