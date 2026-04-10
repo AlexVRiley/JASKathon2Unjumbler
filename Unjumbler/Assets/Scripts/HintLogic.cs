@@ -11,9 +11,6 @@ public class HintLogic : MonoBehaviour
     public JumblerLogic jumbler;
     public char[] unjumbled;
     public char[] author;
-    public char[] jumbled;
-    public bool allCaps = true; //***FOR CAPITALIZATION LOGIC***
-    public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
     [SerializeField]
     public GameObject hintBox; //need to make UI popup for hint box
     public string hintStr;
@@ -25,7 +22,6 @@ public class HintLogic : MonoBehaviour
     public string[] colourArr;
     public int hintCount = 0;
 
-    [MenuItem("Hint")]
 
     public void hints()
     {
