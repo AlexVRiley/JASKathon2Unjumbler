@@ -17,7 +17,7 @@ public class HintLogic : MonoBehaviour
     [SerializeField]
     public GameObject hintBox; //need to make UI popup for hint box
     public string hintStr;
-    [SerializeField]
+    //[SerializeField]
     public Text textElement;
     public char[] hintArr;
     [SerializeField]
@@ -31,7 +31,7 @@ public class HintLogic : MonoBehaviour
     {
        
         // Get the reference to the script
-        hintBox = Instantiate(hintBox);
+        //hintBox = Instantiate(hintBox);
         jumbler = FindAnyObjectByType<JumblerLogic>();
         checkTarget = FindAnyObjectByType<SnapTarget>();
 
@@ -41,18 +41,17 @@ public class HintLogic : MonoBehaviour
         author = jumbler.author;
         hintStr = jumbler.hintStr;
         colourArr = jumbler.colourArr;
-    }
-    public void hint()
-    {
+    
         //SceneManager.LoadScene();
         hintCount++;
         if (hintCount == 1)
         { // reveal Author name}
             for (int l = 0; l > unjumbled.Length; l++)
             {
-                if (l > unjumbled.Length - author.Length)
+                if (l > unjumbled.Length - (author.Length+2))
                 {
-                    hintArr[l] = unjumbled[l]; //updates to show author                       
+                    hintArr[l] = unjumbled[l]; //updates to show author
+                    Debug.Log(l);
 
                     // need to show hint in text box
                 }
