@@ -2,8 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
+
+
 public class SnapTarget : MonoBehaviour, IDropHandler
 {
+    public string snap_Colour;
+    public string[] colourArr; //JumblerLogic will reference this array
     private TMP_Text snapLetterText;
 
     /* When the user ends their drag on a draggable object we check the following: */
@@ -20,11 +24,13 @@ public class SnapTarget : MonoBehaviour, IDropHandler
 
             /* Now we just set the dragged objects position to the DropTargets */
             draggedRectTransform.position = dropTargetRectTransform.position;
+
+            /* Compare draggedItem's letter to the SnapTarget's letter */
+            // if correct: snap_Colour = 'green'
+            // if incorrect: snap_Colour = 'red'
+            // if (level = 1 || level = 3) display this colour immediately
+            // else just store the colour in colourArr and display the default colour
+
         }
     }
-
-    /* TODO
-     * - Add Variables to compare DraggedLetter's letter to the SnapTargets Letter
-     * - Add Check for if the compared letter is correct
-     */
 }
