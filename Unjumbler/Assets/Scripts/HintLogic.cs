@@ -14,13 +14,14 @@ public class HintLogic : MonoBehaviour
     [SerializeField]
     public GameObject hintBox; //need to make UI popup for hint box
     public string hintStr;
-    //[SerializeField]
     public Text textElement;
     public char[] hintArr;
     [SerializeField]
     public SnapTarget checkTarget;
+    public GameObject[] targetArr; 
     public string[] colourArr;
     public int hintCount = 0;
+    string TargetColour;
 
 
     public void hints()
@@ -35,34 +36,26 @@ public class HintLogic : MonoBehaviour
         colourArr = checkTarget.colourArr;
         unjumbled = jumbler.unjumbled;
         author = jumbler.author;
-        hintStr = jumbler.hintStr;
-        colourArr = jumbler.colourArr;
-    
-        //SceneManager.LoadScene();
+
+
         hintCount++;
         if (hintCount == 1)
-        { // reveal Author name}
-            for (int l = 0; l > unjumbled.Length; l++)
-            {
-                if (l > unjumbled.Length - (author.Length+2))
-                {
-                    hintArr[l] = unjumbled[l]; //updates to show author
-                    Debug.Log(l);
-
-                    // need to show hint in text box
-                }
-            }
-            hintStr = new string(hintArr);
+        {
+            hintStr = " Author: " + new string(author);
             textElement.text = hintStr;
-        }
-        else
-        { //(check if answer is already correct)
-            for (int k = 0; k > colourArr.Length; k++)
+        } else {   
+            //(check if answer is already correct)
+            // change so it checks all snapTarget colours  
+            CheckTargets();
             {
-                if (colourArr[k] != "green")
+                for (int j = 0; j < colourArr.Length; j++)
                 {  // if red, give hint
-                    giveHint();
-                    textElement.text = hintStr;
+                    if (colourArr[j] != "green")
+                    {
+                        giveHint();
+                        textElement.text = hintStr;
+                        return;
+                    }
                 }
             }
             hintStr = "Congratulations, your solution is correct!";
@@ -71,6 +64,7 @@ public class HintLogic : MonoBehaviour
         }
     }
     public void giveHint()
+        //change to picka  single snapTarget 
     {
         int rand = Random.Range(0, unjumbled.Length);   // picks random index
         for (int m = 0; m < unjumbled.Length; m++)
@@ -85,5 +79,13 @@ public class HintLogic : MonoBehaviour
         }
         hintStr = new string(hintArr);
         textElement.text = hintStr;
+    }
+
+    public void CheckTargets()
+    {
+        targetArr = GameObject.FindGameObjectsWithTag("CheckTarget");
+        for (int k = 0; k < targetArr.Length; k++) {
+            colourArr[k] = targetArr[k].GetComponent<SnapTarget>().snap_Colour;
+        }
     }
 }
