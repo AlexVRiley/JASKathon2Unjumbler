@@ -1,4 +1,8 @@
+using UnityEditor;
+using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class HintLogic : MonoBehaviour
 {
@@ -10,27 +14,30 @@ public class HintLogic : MonoBehaviour
     public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
     public GameObject hintBox; //need to make UI popup for hint box
     public string hintStr;
+    public Text textElement;
     public char[] hintArr;
     public SnapTarget checkTarget;
     public string[] colourArr;
     public int hintCount = 0;
 
+    [MenuItem("Hint")]
 
-    private void Start()
+    public void hints()
     {
-        hintBox = Instantiate(hintBox);
+       
         // Get the reference to the script
+        hintBox = Instantiate(hintBox);
         jumbler = FindAnyObjectByType<JumblerLogic>();
         checkTarget = FindAnyObjectByType<SnapTarget>();
 
-        // Point localReference to the same array in ScriptA
+        // Point localReference 
         colourArr = checkTarget.colourArr;
         unjumbled = jumbler.unjumbled;
         author = jumbler.author;
         hintStr = jumbler.hintStr;
         colourArr = jumbler.colourArr;
     }
-    public string hint()
+    public void hint()
     {
         hintCount++;
         if (hintCount == 1)
@@ -45,8 +52,7 @@ public class HintLogic : MonoBehaviour
                 }
             }
             hintStr = new string(hintArr);
-            return hintStr;
-
+            textElement.text = hintStr;
         }
         else
         { //(check if answer is already correct)
@@ -55,15 +61,15 @@ public class HintLogic : MonoBehaviour
                 if (colourArr[k] != "green")
                 {  // if red, give hint
                     giveHint();
-                    return hintStr;
+                    textElement.text = hintStr;
                 }
             }
             hintStr = "Congratulations, your solution is correct!";
-            return hintStr;
+            textElement.text = hintStr;
             // write to text box
         }
     }
-    public string giveHint()
+    public void giveHint()
     {
         int rand = Random.Range(0, unjumbled.Length);   // picks random index
         for (int m = 0; m < unjumbled.Length; m++)
@@ -77,6 +83,6 @@ public class HintLogic : MonoBehaviour
             }
         }
         hintStr = new string(hintArr);
-        return hintStr;
+        textElement.text = hintStr;
     }
 }
