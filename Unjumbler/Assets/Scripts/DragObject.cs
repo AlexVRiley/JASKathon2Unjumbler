@@ -27,14 +27,18 @@ public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
         canvas = GetComponentInParent<Canvas>(); // The canvas is a parent so we use this
 
         /* Adding in the draggable letters text mesh pro text object for comparison */
-        dragLetterText = GetComponent<TMP_Text>();
-
-        // Set the dragLetterText to the proper instantiated letter
-
+        dragLetterText = GetComponentInChildren<TMP_Text>();
 
         /* When the Letters get instantiated we need to find the transform of an object
          * named "NoGrouping" in order for dragging to work properly */
         noGrouping = GameObject.Find("NoGrouping").transform;
+
+        /* Added this line here to make sure the draggable letter knows that this is it's
+         * reference when being instantiated by the infiniteLetter script */
+        if(draggableLetter == null)
+        {
+            draggableLetter = this.gameObject;
+        }
     }
 
     /* This function calls when the users clicks and drags the object this script is 
@@ -52,7 +56,10 @@ public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
         
         /* Remove parent and set to special empty object "NoGrouping" which is a child of
          * "GameplayUI" canvas and not a child of "LetterSpawnGroup" */
-        draggableLetter.transform.SetParent(noGrouping, true); 
+        draggableLetter.transform.SetParent(noGrouping, true);
+
+        // Snap the letter to the users cursor
+        SnapToCursor(eventData);
     }
 
     /* This just makes sure the object being interacted with (dragged) stays with the cursor */
@@ -71,7 +78,15 @@ public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
         canvasGroup.blocksRaycasts = true;
     }
 
-    /* TODO
-     * - Add Variables to compare DraggedLetter's letter to the SnapTargets Letter
-     */
+    /* Made this new function to make it so when the user starts dragging a letter we set the 
+     * letter objects center to the center of the users cursor to make the interaction of
+     * dropping the letters into the snapTargets more responsive */
+    private void SnapToCursor(PointerEventData eventData)
+    {
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform) noGrouping, 
+            eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
+        {
+            rectTransform.localPosition = localPoint;
+        }
+    }
 }

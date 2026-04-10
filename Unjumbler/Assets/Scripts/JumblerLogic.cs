@@ -51,6 +51,9 @@ public class JumblerLogic : MonoBehaviour
     [SerializeField]
     private GameObject snapSpawn;
 
+    [SerializeField]
+    private GameObject infinitePrefab;
+
     public void stringJumble()
     {
         randQuote = Random.Range(0,numQuote);   //picks random quote and author number
@@ -104,7 +107,7 @@ public class JumblerLogic : MonoBehaviour
             char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.',;:".ToCharArray();
             for (int x = 0; x < alphabet.Length; x++)
             {
-                GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+                GameObject instance = Instantiate(infinitePrefab, letterSpawn.transform, true);
                 instance.name = "Letter " + x;
                 instance.GetComponentInChildren<TMP_Text>().text = alphabet[x].ToString();
             }
