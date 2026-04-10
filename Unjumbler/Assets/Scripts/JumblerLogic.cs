@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using TMPro;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEngine;
-using TMPro;
 using Unity.VisualScripting.FullSerializer;
-using Unity.Burst.CompilerServices;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class JumblerLogic : MonoBehaviour
@@ -273,6 +274,11 @@ public class JumblerLogic : MonoBehaviour
         }
         hintStr = new string(hintArr);
         return hintStr;
+    }
+
+    public void exitLevel()
+    {
+        SceneManager.LoadScene("UnjumblerScene");
     }
 
 }
