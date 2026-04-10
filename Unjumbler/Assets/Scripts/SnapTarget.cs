@@ -14,7 +14,7 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
     {
         if (checkImmediately == true)
         {
-            oddLevel == true;
+            oddLevel = true;
         }
     }
 
@@ -34,12 +34,12 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
             draggedRectTransform.position = dropTargetRectTransform.position;
 
             /* Compare draggedItem's letter to the SnapTarget's letter */
-            if (snapLetterText == dragLetterText)
+            if (snapLetterText.text == draggedItem.GetComponent<TMP_Text>().text)
             {
                 snap_Colour = "green";
             }
             
-            if (snapLetterText != dragLetterText)
+            if (snapLetterText.text != draggedItem.GetComponent<TMP_Text>().text)
             {
                 snap_Colour = "red";
             }
@@ -56,7 +56,7 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         RectTransform dropTargetRectTransform = GetComponent<RectTransform>();
-        RectTransform draggedRectTransform = GameObject.FindGameObjectsWithTag("DraggableTag").GetComponent<RectTransform>();
+        /*RectTransform draggedRectTransform = GameObject.FindGameObjectsWithTag("DraggableTag").GetComponent<RectTransform>();
 
         if (dropTargetRectTransform.position != draggedRectTransform.position)
         {
@@ -67,7 +67,7 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
                         // display colour change
                     }
 
-        }
+        }*/
     }
-    
+
 }

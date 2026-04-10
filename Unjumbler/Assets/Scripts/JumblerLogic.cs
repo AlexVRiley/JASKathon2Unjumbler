@@ -198,7 +198,7 @@ public class JumblerLogic : MonoBehaviour
             {
                 instance.GetComponent<CanvasRenderer>().SetAlpha(0);
             }
-            
+
             // We keep track of our positon on the grid.
             row++;
             if (row >= targetMaxChar)
@@ -212,9 +212,6 @@ public class JumblerLogic : MonoBehaviour
     {
         // Get the reference to the script
         checkTarget = FindAnyObjectByType<SnapTarget>();
-
-        // Point localReference to the same array in ScriptA
-        colourArr = checkTarget.colourArr;
 
         hintCount ++;
         if (hintCount == 1){ // reveal Author name}
