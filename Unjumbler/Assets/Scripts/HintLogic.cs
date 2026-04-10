@@ -68,14 +68,16 @@ public class HintLogic : MonoBehaviour
     public void giveHint()
         //change to picka  single snapTarget 
     {
-        int rand = Random.Range(0, unjumbled.Length);   // picks random index
-        for (int m = 0; m < unjumbled.Length; m++)
+        int rand = Random.Range(0, targetArr.Length);   // picks random index
+        for (int m = 0; m < targetArr.Length; m++)
         {    // loops hint array to check if rand is green
             if (m == rand)
             {
-                if (colourArr[m] != "green")
+                if (targetArr[m].GetComponent<SnapTarget>().snap_Colour != "green")
                 {
-                    hintArr[m] = unjumbled[m];
+                     targetArr[m].GetComponent<SnapTarget>().isHint = true;
+
+
                 }
             }
         }
