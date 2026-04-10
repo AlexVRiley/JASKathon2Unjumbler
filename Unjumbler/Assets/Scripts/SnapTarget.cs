@@ -4,7 +4,7 @@ using TMPro;
 
 
 
-public class SnapTarget : MonoBehaviour, IDropHandler
+public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
 {
     public string snap_Colour;
     public string[] colourArr; //JumblerLogic will reference this array
@@ -37,5 +37,11 @@ public class SnapTarget : MonoBehaviour, IDropHandler
             }
 
         }
+    }
+
+    /* For updating the check on if a letter is removed from a snapTarget */
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        // Logic here
     }
 }
