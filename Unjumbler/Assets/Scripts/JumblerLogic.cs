@@ -37,7 +37,7 @@ public class JumblerLogic : MonoBehaviour
     public string hintStr;
     public char[] hintArr;
     public SnapTarget checkTarget;
-    public string[] colourArr;
+    public string[] colourArr; //**Referenced also by SnapTarget**
     public int hintCount = 0;
 
     public int targetMaxChar;
@@ -62,6 +62,7 @@ public class JumblerLogic : MonoBehaviour
         unjumbled = unjumbled.Concat(" -").ToArray();
         unjumbled = unjumbled.Concat(author).ToArray();
         jumbled = new char[unjumbled.Length];
+        colourArr = new string[unjumbled.Length];
         hintArr = new char[unjumbled.Length];
 
         for (int j = 0; j <= unjumbled.Length - 1; j++)
@@ -133,6 +134,7 @@ public class JumblerLogic : MonoBehaviour
     /* To format the snapTargets (blanks) properly without cutting off the words in the
      * grid layout group we need to be able to detect if the next word instantiating is
      * longer than the total length of the line we are on. */
+    
     public void instantiateSnapTarget()
     {
         int row = 0;
@@ -198,19 +200,6 @@ public class JumblerLogic : MonoBehaviour
                 instance.GetComponent<CanvasRenderer>().SetAlpha(0);
             }
 
-            checkTarget = FindAnyObjectByType<SnapTarget>();
-            colourArr = checkTarget.colourArr;
-
-            for (int i = 0; i < colourArr.Length; i++)
-            {
-                if (colourArr[i] == "green")
-                {
-                    // turn that letter's colour green
-                }
-                if (colourArr[i] == "red")
-                {
-                    // turn that letter's colour red
-                }
             }
             // We keep track of our positon on the grid.
             row++;

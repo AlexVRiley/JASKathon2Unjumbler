@@ -26,10 +26,15 @@ public class SnapTarget : MonoBehaviour, IDropHandler
             draggedRectTransform.position = dropTargetRectTransform.position;
 
             /* Compare draggedItem's letter to the SnapTarget's letter */
-            // if correct: snap_Colour = 'green'
-            // if incorrect: snap_Colour = 'red'
-            // if (level = 1 || level = 3) display this colour immediately
-            // else just store the colour in colourArr and display the default colour
+            if (snapLetterText == dragLetterText)
+            {
+                snap_Colour = "green";
+            }
+            
+            if (snapLetterText != dragLetterText)
+            {
+                snap_Colour = "red";
+            }
 
         }
     }
