@@ -62,7 +62,6 @@ public class JumblerLogic : MonoBehaviour
         unjumbled = unjumbled.Concat(" -").ToArray();
         unjumbled = unjumbled.Concat(author).ToArray();
         jumbled = new char[unjumbled.Length];
-        colourArr = new string[unjumbled.Length];
         hintArr = new char[unjumbled.Length];
 
         for (int j = 0; j <= unjumbled.Length - 1; j++)
@@ -199,8 +198,7 @@ public class JumblerLogic : MonoBehaviour
             {
                 instance.GetComponent<CanvasRenderer>().SetAlpha(0);
             }
-
-            }
+            
             // We keep track of our positon on the grid.
             row++;
             if (row >= targetMaxChar)
@@ -233,6 +231,7 @@ public class JumblerLogic : MonoBehaviour
             return hintStr;
 
         } else
+
         { //(check if answer is already correct)
             for (int k = 0; k > colourArr.Length; k++)
             {
