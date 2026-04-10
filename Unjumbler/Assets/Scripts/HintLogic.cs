@@ -26,43 +26,45 @@ public class HintLogic : MonoBehaviour
 
     public void hints()
     {
-       
+
         // Get the reference to the script
         //hintBox = Instantiate(hintBox);
         jumbler = FindAnyObjectByType<JumblerLogic>();
         checkTarget = FindAnyObjectByType<SnapTarget>();
 
         // Point localReference 
-        colourArr = checkTarget.colourArr;
-        unjumbled = jumbler.unjumbled;
+        //colourArr = checkTarget.colourArr;
+        //unjumbled = jumbler.unjumbled;
         author = jumbler.author;
-
-
         hintCount++;
         if (hintCount == 1)
         {
             hintStr = " Author: " + new string(author);
             textElement.text = hintStr;
-        } else {   
+        }
+        else
+        {
             //(check if answer is already correct)
             // change so it checks all snapTarget colours  
             CheckTargets();
-            {
-                for (int j = 0; j < colourArr.Length; j++)
-                {  // if red, give hint
-                    if (colourArr[j] != "green")
-                    {
-                        giveHint();
-                        textElement.text = hintStr;
-                        return;
-                    }
+            for (int j = 0; j < colourArr.Length; j++)
+            {  // if red, give hint
+                if (colourArr[j] != "green")
+                {
+                    giveHint();
+                    return;
+
+                }
+                else
+                {
+                    hintStr = "Congratulations, your solution is correct!";
+                    // write to text box
                 }
             }
-            hintStr = "Congratulations, your solution is correct!";
-            textElement.text = hintStr;
-            // write to text box
         }
     }
+    
+    
     public void giveHint()
         //change to picka  single snapTarget 
     {
