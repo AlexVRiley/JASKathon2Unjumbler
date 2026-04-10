@@ -33,7 +33,7 @@ public class HintLogic : MonoBehaviour
         checkTarget = FindAnyObjectByType<SnapTarget>();
 
         // Point localReference 
-        colourArr = checkTarget.colourArr;
+        //colourArr = checkTarget.colourArr;
         unjumbled = jumbler.unjumbled;
         author = jumbler.author;
 
