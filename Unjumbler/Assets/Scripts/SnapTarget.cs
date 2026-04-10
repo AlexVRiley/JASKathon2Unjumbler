@@ -8,15 +8,7 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
 {
     public string snap_Colour = "default";
     private TMP_Text snapLetterText;
-    private bool oddLevel = false;
-
-    public void setCheck(bool checkImmediately)
-    {
-        if (checkImmediately == true)
-        {
-            oddLevel = true;
-        }
-    }
+    public bool isHint = false;
 
     /* When the user ends their drag on a draggable object we check the following: */
     public void OnDrop(PointerEventData eventData)
@@ -70,4 +62,13 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
         }*/
     }
 
+
+    public void ColourHint()
+    {
+        // set target vertex to white 
+        if (isHint == false)
+        {
+            snapLetterText.color = new Color(255,255,255);
+        }
+    }
 }

@@ -26,7 +26,7 @@ public class HintLogic : MonoBehaviour
 
     public void hints()
     {
-       
+
         // Get the reference to the script
         //hintBox = Instantiate(hintBox);
         jumbler = FindAnyObjectByType<JumblerLogic>();
@@ -34,46 +34,50 @@ public class HintLogic : MonoBehaviour
 
         // Point localReference 
         //colourArr = checkTarget.colourArr;
-        unjumbled = jumbler.unjumbled;
+        //unjumbled = jumbler.unjumbled;
         author = jumbler.author;
-
-
         hintCount++;
         if (hintCount == 1)
         {
             hintStr = " Author: " + new string(author);
             textElement.text = hintStr;
-        } else {   
+        }
+        else
+        {
             //(check if answer is already correct)
             // change so it checks all snapTarget colours  
             CheckTargets();
-            {
-                for (int j = 0; j < colourArr.Length; j++)
-                {  // if red, give hint
-                    if (colourArr[j] != "green")
-                    {
-                        giveHint();
-                        textElement.text = hintStr;
-                        return;
-                    }
+            for (int j = 0; j < colourArr.Length; j++)
+            {  // if red, give hint
+                if (colourArr[j] != "green")
+                {
+                    giveHint();
+                    return;
+
+                }
+                else
+                {
+                    hintStr = "Congratulations, your solution is correct!";
+                    // write to text box
                 }
             }
-            hintStr = "Congratulations, your solution is correct!";
-            textElement.text = hintStr;
-            // write to text box
         }
     }
+    
+    
     public void giveHint()
         //change to picka  single snapTarget 
     {
-        int rand = Random.Range(0, unjumbled.Length);   // picks random index
-        for (int m = 0; m < unjumbled.Length; m++)
+        int rand = Random.Range(0, targetArr.Length);   // picks random index
+        for (int m = 0; m < targetArr.Length; m++)
         {    // loops hint array to check if rand is green
             if (m == rand)
             {
-                if (colourArr[m] != "green")
+                if (targetArr[m].GetComponent<SnapTarget>().snap_Colour != "green")
                 {
-                    hintArr[m] = unjumbled[m];
+                     targetArr[m].GetComponent<SnapTarget>().isHint = true;
+
+
                 }
             }
         }
