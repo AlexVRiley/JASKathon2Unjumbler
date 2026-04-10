@@ -6,9 +6,17 @@ using TMPro;
 
 public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
 {
-    public string snap_Colour;
-    public string[] colourArr; //JumblerLogic will reference this array
+    public string snap_Colour = "default";
     private TMP_Text snapLetterText;
+    private bool oddLevel = false;
+
+    public void setCheck(bool checkImmediately)
+    {
+        if (checkImmediately == true)
+        {
+            oddLevel = true;
+        }
+    }
 
     /* When the user ends their drag on a draggable object we check the following: */
     public void OnDrop(PointerEventData eventData)
@@ -26,10 +34,20 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
             draggedRectTransform.position = dropTargetRectTransform.position;
 
             /* Compare draggedItem's letter to the SnapTarget's letter */
-            // if correct: snap_Colour = 'green'
-            // if incorrect: snap_Colour = 'red'
-            // if (level = 1 || level = 3) display this colour immediately
-            // else just store the colour in colourArr and display the default colour
+            if (snapLetterText.text == draggedItem.GetComponent<TMP_Text>().text)
+            {
+                snap_Colour = "green";
+            }
+            
+            if (snapLetterText.text != draggedItem.GetComponent<TMP_Text>().text)
+            {
+                snap_Colour = "red";
+            }
+
+            if (oddLevel == true)
+            {
+                // display colour change
+            }
 
         }
     }
@@ -37,6 +55,19 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
     /* For updating the check on if a letter is removed from a snapTarget */
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Logic here
+        RectTransform dropTargetRectTransform = GetComponent<RectTransform>();
+        /*RectTransform draggedRectTransform = GameObject.FindGameObjectsWithTag("DraggableTag").GetComponent<RectTransform>();
+
+        if (dropTargetRectTransform.position != draggedRectTransform.position)
+        {
+            snap_Colour = "default";
+
+                    if (oddLevel == true)
+                    {
+                        // display colour change
+                    }
+
+        }*/
     }
+
 }

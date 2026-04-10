@@ -38,7 +38,7 @@ public class JumblerLogic : MonoBehaviour
     public string hintStr;
     public char[] hintArr;
     public SnapTarget checkTarget;
-    public string[] colourArr;
+    public string[] colourArr; //**Referenced also by SnapTarget**
     public int hintCount = 0;
 
     public int targetMaxChar;
@@ -134,6 +134,7 @@ public class JumblerLogic : MonoBehaviour
     /* To format the snapTargets (blanks) properly without cutting off the words in the
      * grid layout group we need to be able to detect if the next word instantiating is
      * longer than the total length of the line we are on. */
+    
     public void instantiateSnapTarget()
     {
         int row = 0;
@@ -199,20 +200,6 @@ public class JumblerLogic : MonoBehaviour
                 instance.GetComponent<CanvasRenderer>().SetAlpha(0);
             }
 
-            checkTarget = FindAnyObjectByType<SnapTarget>();
-            colourArr = checkTarget.colourArr;
-
-            for (int i = 0; i < colourArr.Length; i++)
-            {
-                if (colourArr[i] == "green")
-                {
-                    // turn that letter's colour green
-                }
-                if (colourArr[i] == "red")
-                {
-                    // turn that letter's colour red
-                }
-            }
             // We keep track of our positon on the grid.
             row++;
             if (row >= targetMaxChar)
@@ -226,9 +213,6 @@ public class JumblerLogic : MonoBehaviour
     {
         // Get the reference to the script
         checkTarget = FindAnyObjectByType<SnapTarget>();
-
-        // Point localReference to the same array in ScriptA
-        colourArr = checkTarget.colourArr;
 
         hintCount ++;
         if (hintCount == 1){ // reveal Author name}
@@ -245,6 +229,7 @@ public class JumblerLogic : MonoBehaviour
             return hintStr;
 
         } else
+
         { //(check if answer is already correct)
             for (int k = 0; k > colourArr.Length; k++)
             {
