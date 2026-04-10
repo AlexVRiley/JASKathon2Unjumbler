@@ -51,6 +51,9 @@ public class JumblerLogic : MonoBehaviour
     [SerializeField]
     private GameObject snapSpawn;
 
+    [SerializeField]
+    private GameObject infinitePrefab;
+
     public void stringJumble()
     {
         randQuote = Random.Range(0,numQuote);   //picks random quote and author number
@@ -104,7 +107,7 @@ public class JumblerLogic : MonoBehaviour
             char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.',;:".ToCharArray();
             for (int x = 0; x < alphabet.Length; x++)
             {
-                GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+                GameObject instance = Instantiate(infinitePrefab, letterSpawn.transform, true);
                 instance.name = "Letter " + x;
                 instance.GetComponentInChildren<TMP_Text>().text = alphabet[x].ToString();
             }
@@ -187,28 +190,33 @@ public class JumblerLogic : MonoBehaviour
             GameObject instance = Instantiate(snapPrefab, snapSpawn.transform, true);
             instance.name = "Target " + x;
 
+            TMP_Text textComponent = instance.GetComponentInChildren<TMP_Text>();
+            textComponent.text = unjumbled[x].ToString();
+
+            if (string.IsNullOrWhiteSpace(textComponent.text))
             {
-                checkTarget = FindAnyObjectByType<SnapTarget>();
-                colourArr = checkTarget.colourArr;
+                instance.GetComponent<CanvasRenderer>().SetAlpha(0);
+            }
 
-                for (int i = 0; i < colourArr.Length; i++)
+            checkTarget = FindAnyObjectByType<SnapTarget>();
+            colourArr = checkTarget.colourArr;
+
+            for (int i = 0; i < colourArr.Length; i++)
+            {
+                if (colourArr[i] == "green")
                 {
-                    if (colourArr[i] == "green")
-                    {
-                        // turn that letter's colour green
-                    }
-                    if (colourArr[i] == "red")
-                    {
-                        // turn that letter's colour red
-                    }
-
-                    // We keep track of our positon on the grid.
-                    row++;
-                    if (row >= targetMaxChar)
-                    {
-                        row = 0;
-                    }
+                    // turn that letter's colour green
                 }
+                if (colourArr[i] == "red")
+                {
+                    // turn that letter's colour red
+                }
+            }
+            // We keep track of our positon on the grid.
+            row++;
+            if (row >= targetMaxChar)
+            {
+                row = 0;
             }
         }
     }
