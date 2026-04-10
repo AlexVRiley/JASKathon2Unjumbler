@@ -32,15 +32,6 @@ public class GameManager : MonoBehaviour
         jumbler.instantiateSnapTarget();
     }
 
-    public void ExitButton()
-    {
-
-    }
-
-    public void Hint()
-    {
-
-    }
     //TODO:
     /* -Old letters removed on moving back to main menu
      * -Upper and lower case button linked to logic 
