@@ -6,9 +6,10 @@ using TMPro;
 
 public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
 {
-    public string snap_Colour = "default";
-    private TMP_Text snapLetterText;
+    public string snap_Colour = null;
+    public TMP_Text snapLetterText;
     public bool isHint = false;
+    public TextMeshProUGUI textColor;
 
     /* When the user ends their drag on a draggable object we check the following: */
     public void OnDrop(PointerEventData eventData)
@@ -36,10 +37,10 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
                 snap_Colour = "red";
             }
 
-            if (oddLevel == true)
+           /* if (oddLevel == true)
             {
                 // display colour change
-            }
+            }*/
 
         }
     }
@@ -52,7 +53,7 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
 
         if (dropTargetRectTransform.position != draggedRectTransform.position)
         {
-            snap_Colour = "default";
+            snap_Colour = null;
 
                     if (oddLevel == true)
                     {
@@ -63,12 +64,12 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
     }
 
 
-    public void ColourHint()
+/*    public void ColourHint()
     {
         // set target vertex to white 
         if (isHint == false)
         {
             snapLetterText.color = new Color(255,255,255);
         }
-    }
+    }*/
 }

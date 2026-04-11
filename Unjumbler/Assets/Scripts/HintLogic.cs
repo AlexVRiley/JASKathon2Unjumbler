@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using TMPro;
+using Unity.VisualScripting;
 
 public class HintLogic : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class HintLogic : MonoBehaviour
     public string[] colourArr;
     public int hintCount = 0;
     string TargetColour;
+    private GameObject colorChange;
 
 
     public void hints()
@@ -30,7 +33,7 @@ public class HintLogic : MonoBehaviour
         // Get the reference to the script
         //hintBox = Instantiate(hintBox);
         jumbler = FindAnyObjectByType<JumblerLogic>();
-        checkTarget = FindAnyObjectByType<SnapTarget>();
+        //checkTarget = FindAnyObjectByType<SnapTarget>();
 
         // Point localReference 
         //colourArr = checkTarget.colourArr;
@@ -46,7 +49,12 @@ public class HintLogic : MonoBehaviour
         {
             //(check if answer is already correct)
             // change so it checks all snapTarget colours  
+            Debug.Log(":c");
+
             CheckTargets();
+            Debug.Log(checkTarget);
+
+
             for (int j = 0; j < colourArr.Length; j++)
             {  // if red, give hint
                 if (colourArr[j] != "green")
@@ -75,21 +83,25 @@ public class HintLogic : MonoBehaviour
             {
                 if (targetArr[m].GetComponent<SnapTarget>().snap_Colour != "green")
                 {
-                     targetArr[m].GetComponent<SnapTarget>().isHint = true;
-
-
+                    GameObject c = GameObject.Find("Target " + m);
+                    c.GetComponent<TextMeshProUGUI>().color = Color.white;
+                    
                 }
             }
         }
-        hintStr = new string(hintArr);
-        textElement.text = hintStr;
     }
 
     public void CheckTargets()
     {
+        int k = 0;
         targetArr = GameObject.FindGameObjectsWithTag("CheckTarget");
-        for (int k = 0; k < targetArr.Length; k++) {
+        Debug.Log(targetArr);
+        foreach (GameObject CheckTarget in targetArr) {
             colourArr[k] = targetArr[k].GetComponent<SnapTarget>().snap_Colour;
+            Debug.Log(targetArr[k]);
+
+            k++;
+
         }
     }
 }

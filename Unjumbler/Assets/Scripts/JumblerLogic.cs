@@ -147,6 +147,7 @@ public class JumblerLogic : MonoBehaviour
             {
                 GameObject skipInstance = Instantiate(snapPrefab, snapSpawn.transform, true);
                 skipInstance.name = "Target " + x;
+                skipInstance.gameObject.tag = "ignore";
 
                 TMP_Text skipText = skipInstance.GetComponentInChildren<TMP_Text>();
                 skipText.text = unjumbled[x].ToString();
@@ -181,6 +182,7 @@ public class JumblerLogic : MonoBehaviour
 
                         TMP_Text padText = pad.GetComponentInChildren<TMP_Text>();
                         padText.text = " ";
+                        pad.gameObject.tag = "ignore";
                         pad.GetComponent<CanvasRenderer>().SetAlpha(0);
                     }
                     row = 0; // Resets the row when we wrap to the next line.
