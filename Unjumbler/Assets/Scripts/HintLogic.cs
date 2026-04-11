@@ -52,7 +52,8 @@ public class HintLogic : MonoBehaviour
             Debug.Log(":c");
 
             CheckTargets();
-            Debug.Log(checkTarget);
+            Debug.Log(targetArr[0].GetComponent<SnapTarget>().snap_Colour);
+
 
 
             for (int j = 0; j < colourArr.Length; j++)
@@ -84,7 +85,7 @@ public class HintLogic : MonoBehaviour
                 if (targetArr[m].GetComponent<SnapTarget>().snap_Colour != "green")
                 {
                     GameObject c = GameObject.Find("Target " + m);
-                    c.GetComponent<TextMeshProUGUI>().color = Color.white;
+                    c.GetComponent<TMP_Text>().color = Color.white;
                     
                 }
             }
@@ -95,10 +96,12 @@ public class HintLogic : MonoBehaviour
     {
         int k = 0;
         targetArr = GameObject.FindGameObjectsWithTag("CheckTarget");
+        colourArr = new string[targetArr.Length];
         Debug.Log(targetArr);
         foreach (GameObject CheckTarget in targetArr) {
-            colourArr[k] = targetArr[k].GetComponent<SnapTarget>().snap_Colour;
-            Debug.Log(targetArr[k]);
+            string currCol = targetArr[k].GetComponent<SnapTarget>().snap_Colour;
+            colourArr[k] = currCol;
+            Debug.Log(targetArr[k].GetComponent<SnapTarget>().snap_Colour);
 
             k++;
 
