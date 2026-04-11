@@ -5,12 +5,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private JumblerLogic jumbler;
     private SnapTarget allSnaps;
+    public static bool oddLevel;
+
     public void Easy()
     {
         jumbler.stringJumble();
         jumbler.instantiateDraggableLetters(false);
         jumbler.instantiateSnapTarget();
-        allSnaps.setCheck(true);
+        oddLevel = true;
+
     }
 
     public void Medium()
@@ -18,7 +21,8 @@ public class GameManager : MonoBehaviour
         jumbler.stringJumble();
         jumbler.instantiateDraggableLetters(false);
         jumbler.instantiateSnapTarget();
-        allSnaps.setCheck(false);
+        oddLevel = false;
+
     }
 
     public void Hard()
@@ -26,7 +30,8 @@ public class GameManager : MonoBehaviour
         jumbler.stringJumble();
         jumbler.instantiateDraggableLetters(true);
         jumbler.instantiateSnapTarget();
-        allSnaps.setCheck(true);
+        oddLevel = true;
+
     }
 
     public void Expert()
@@ -34,6 +39,7 @@ public class GameManager : MonoBehaviour
         jumbler.stringJumble();
         jumbler.instantiateDraggableLetters(true);
         jumbler.instantiateSnapTarget();
-        allSnaps.setCheck(false);
+        oddLevel = false;
     }
+
 }

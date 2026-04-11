@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 407143883}
   - component: {fileID: 407143882}
   - component: {fileID: 407143881}
+  - component: {fileID: 407143884}
   m_Layer: 5
   m_Name: CapitalButton
   m_TagString: Untagged
@@ -477,9 +478,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 11500000, guid: 8e2e1bb8d9ac9f548824584e9c1df4be, type: 3}
-        m_TargetAssemblyTypeName: UnityEditor.MonoScript, UnityEditor.CoreModule
-        m_MethodName: 
+      - m_Target: {fileID: 1791172077}
+        m_TargetAssemblyTypeName: JumblerLogic, Assembly-CSharp
+        m_MethodName: makeUpper
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -527,6 +528,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407143879}
   m_CullTransparentMesh: 1
+--- !u!114 &407143884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407143879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2e1bb8d9ac9f548824584e9c1df4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JumblerLogic
+  quotes:
+  - We can only see a short distance ahead, but we can see plenty there that needs
+    to be done.
+  - That brain of mine is something more than merely mortal; as time will show.
+  - The most dangerous phrase in the language is, 'We've always done it this way'.
+  - Hope and curiosity about the future seemed better than guarantees
+  - In mathematics you don't understand things. You just get used to them.
+  - I like to learn. That's an art and a science.
+  - We're having an information explosion, and it's certainly obvious that information
+    is of no use unless it's available
+  - Logic is the foundation of the certainty of all the knowledge we acquire.
+  - The world would be a better place if more engineers, like me, hated technology
+  - I'll bet you don't have a computer in your living room.
+  person:
+  - Alan Turing
+  - Ada Lovelace
+  - Grace Hopper
+  - Hedy Lamarr
+  - John von Neumann
+  - Katherin Johnson
+  - Sister Mary Kenneth Keller
+  - Leonhard Euler
+  - Radia Perlman
+  - Mary Allen Wilkes
+  unjumbled: 
+  numQuote: 10
+  author: 
+  jumbled: 
+  letterInstants: []
+  allCaps: 1
+  upperArr: 
+  hintBox: {fileID: 0}
+  hintStr: 
+  hintArr: 
+  checkTarget: {fileID: 0}
+  colourArr: []
+  hintCount: 0
+  targetMaxChar: 0
+  letterPrefab: {fileID: 0}
+  letterSpawn: {fileID: 0}
+  snapPrefab: {fileID: 0}
+  snapSpawn: {fileID: 0}
+  infinitePrefab: {fileID: 0}
 --- !u!1 &410731410
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +1034,7 @@ GameObject:
   - component: {fileID: 773776068}
   - component: {fileID: 773776067}
   - component: {fileID: 773776066}
+  - component: {fileID: 773776069}
   m_Layer: 5
   m_Name: CheckButton
   m_TagString: Untagged
@@ -1048,7 +1105,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 773776067}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 773776069}
+        m_TargetAssemblyTypeName: CheckButton, Assembly-CSharp
+        m_MethodName: OnCheck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &773776067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,6 +1156,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773776064}
   m_CullTransparentMesh: 1
+--- !u!114 &773776069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773776064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349428780d64ff040bf1c3276c7d80d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckButton
 --- !u!1 &799301634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,6 +2864,7 @@ GameObject:
   - component: {fileID: 1612166074}
   - component: {fileID: 1612166073}
   - component: {fileID: 1612166072}
+  - component: {fileID: 1612166075}
   m_Layer: 5
   m_Name: UncapitalButton
   m_TagString: Untagged
@@ -2878,17 +2960,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 11500000, guid: 98d840a7ffe8a86478ef08d350fcfc70, type: 3}
-        m_TargetAssemblyTypeName: UnityEditor.MonoScript, UnityEditor.CoreModule
-        m_MethodName: set_name
-        m_Mode: 5
+      - m_Target: {fileID: 1791172077}
+        m_TargetAssemblyTypeName: JumblerLogic, Assembly-CSharp
+        m_MethodName: makeSentenceCase
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1612166073
 MonoBehaviour:
@@ -2928,6 +3010,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612166070}
   m_CullTransparentMesh: 1
+--- !u!114 &1612166075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612166070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2e1bb8d9ac9f548824584e9c1df4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JumblerLogic
+  quotes:
+  - We can only see a short distance ahead, but we can see plenty there that needs
+    to be done.
+  - That brain of mine is something more than merely mortal; as time will show.
+  - The most dangerous phrase in the language is, 'We've always done it this way'.
+  - Hope and curiosity about the future seemed better than guarantees
+  - In mathematics you don't understand things. You just get used to them.
+  - I like to learn. That's an art and a science.
+  - We're having an information explosion, and it's certainly obvious that information
+    is of no use unless it's available
+  - Logic is the foundation of the certainty of all the knowledge we acquire.
+  - The world would be a better place if more engineers, like me, hated technology
+  - I'll bet you don't have a computer in your living room.
+  person:
+  - Alan Turing
+  - Ada Lovelace
+  - Grace Hopper
+  - Hedy Lamarr
+  - John von Neumann
+  - Katherin Johnson
+  - Sister Mary Kenneth Keller
+  - Leonhard Euler
+  - Radia Perlman
+  - Mary Allen Wilkes
+  unjumbled: 
+  numQuote: 10
+  author: 
+  jumbled: 
+  letterInstants: []
+  allCaps: 1
+  upperArr: 
+  hintBox: {fileID: 0}
+  hintStr: 
+  hintArr: 
+  checkTarget: {fileID: 0}
+  colourArr: []
+  hintCount: 0
+  targetMaxChar: 0
+  letterPrefab: {fileID: 0}
+  letterSpawn: {fileID: 0}
+  snapPrefab: {fileID: 0}
+  snapSpawn: {fileID: 0}
+  infinitePrefab: {fileID: 0}
 --- !u!1 &1791172076
 GameObject:
   m_ObjectHideFlags: 0

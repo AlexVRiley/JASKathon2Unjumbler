@@ -13,7 +13,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
     [SerializeField]
     private GameObject draggableLetter;
     [SerializeField]
-    private TMP_Text dragLetterText;
+    public TMP_Text dragLetterText;
 
     /* I am using the awake method because it only runs once when the object it is 
      * attatched to becomes active in the scene */
