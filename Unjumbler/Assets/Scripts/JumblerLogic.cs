@@ -123,13 +123,34 @@ public class JumblerLogic : MonoBehaviour
         letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
         for (int k = 0; k < letterArr.Length; k++)
         {
+            bool thisLetter = letterArr[k].GetComponent<DragObject>().isUpperInSentenceCase;
+            if (thisLetter == false)
+            {
+                string uncapitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText.text;
+                uncapitalizeLetter = uncapitalizeLetter.ToUpper();
+            }
+        }
+
+        /*letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
+        for (int k = 0; k < letterArr.Length; k++)
+        {
             TMP_Text capitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText;
             capitalizeLetter.text = capitalizeLetter.text.ToUpper();
-        }
+        }*/
     }
 
     public void makeSentenceCase()
     {
+        letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
+        for (int k = 0; k < letterArr.Length; k++)
+        {
+            bool thisLetter = letterArr[k].GetComponent<DragObject>().isUpperInSentenceCase;
+            if (thisLetter == false)
+            {
+                string uncapitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText.text;
+                uncapitalizeLetter = uncapitalizeLetter.ToLower();
+            }
+        }
 
     }
     

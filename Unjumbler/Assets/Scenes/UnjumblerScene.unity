@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 407143881}
   - component: {fileID: 407143884}
   m_Layer: 5
-  m_Name: CapitalButton
+  m_Name: UnCapitalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -480,7 +480,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1791172077}
         m_TargetAssemblyTypeName: JumblerLogic, Assembly-CSharp
-        m_MethodName: makeUpper
+        m_MethodName: makeSentenceCase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -569,8 +569,6 @@ MonoBehaviour:
   author: 
   jumbled: 
   letterInstants: []
-  allCaps: 1
-  upperArr: 
   hintBox: {fileID: 0}
   hintStr: 
   hintArr: 
@@ -582,6 +580,8 @@ MonoBehaviour:
   letterSpawn: {fileID: 0}
   snapPrefab: {fileID: 0}
   snapSpawn: {fileID: 0}
+  checkLetter: {fileID: 0}
+  letterArr: []
   infinitePrefab: {fileID: 0}
 --- !u!1 &410731410
 GameObject:
@@ -2866,7 +2866,7 @@ GameObject:
   - component: {fileID: 1612166072}
   - component: {fileID: 1612166075}
   m_Layer: 5
-  m_Name: UncapitalButton
+  m_Name: CapitalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2962,7 +2962,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1791172077}
         m_TargetAssemblyTypeName: JumblerLogic, Assembly-CSharp
-        m_MethodName: makeSentenceCase
+        m_MethodName: makeUpper
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3051,8 +3051,6 @@ MonoBehaviour:
   author: 
   jumbled: 
   letterInstants: []
-  allCaps: 1
-  upperArr: 
   hintBox: {fileID: 0}
   hintStr: 
   hintArr: 
@@ -3064,6 +3062,8 @@ MonoBehaviour:
   letterSpawn: {fileID: 0}
   snapPrefab: {fileID: 0}
   snapSpawn: {fileID: 0}
+  checkLetter: {fileID: 0}
+  letterArr: []
   infinitePrefab: {fileID: 0}
 --- !u!1 &1791172076
 GameObject:
@@ -3123,8 +3123,6 @@ MonoBehaviour:
   author: 
   jumbled: 
   letterInstants: []
-  allCaps: 1
-  upperArr: 
   hintBox: {fileID: 0}
   hintStr: 
   hintArr: 
@@ -3136,6 +3134,8 @@ MonoBehaviour:
   letterSpawn: {fileID: 2022491868}
   snapPrefab: {fileID: 7030445949828445410, guid: 9c56f52b6b4a20d49b4fab6f62c3ca44, type: 3}
   snapSpawn: {fileID: 1093024456}
+  checkLetter: {fileID: 0}
+  letterArr: []
   infinitePrefab: {fileID: 7743934295232500297, guid: 0e2cb04479667f44580c5302fc8c286f, type: 3}
 --- !u!4 &1791172078
 Transform:
