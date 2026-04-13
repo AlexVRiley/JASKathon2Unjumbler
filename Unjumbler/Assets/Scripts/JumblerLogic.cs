@@ -81,7 +81,7 @@ public class JumblerLogic : MonoBehaviour
         {
             int randI = Random.Range(0, unjumbled.Length);
             char temp = jumbled[i];
-            if (temp != ' ' && unjumbled[randI] != ' ')
+            if (temp != ' ' && jumbled[randI] != ' ')
             {
                 jumbled[i] = jumbled[randI];
                 jumbled[randI] = temp;
