@@ -80,13 +80,13 @@ public class JumblerLogic : MonoBehaviour
         for (int i = 0; i < unjumbled.Length - 1; i++)
         {
             int randI = Random.Range(0, unjumbled.Length);
-            char temp = unjumbled[randI];
+            char temp = jumbled[i];
             if (temp != ' ' && unjumbled[randI] != ' ')
             {
-                jumbled[i] = temp;
+                jumbled[i] = jumbled[randI];
+                jumbled[randI] = temp;
                 Debug.Log(jumbled[i]);
-            }
-            
+            }            
         }
 
         //upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
