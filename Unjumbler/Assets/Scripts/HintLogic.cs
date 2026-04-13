@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 public class HintLogic : MonoBehaviour
 {
     [SerializeField]
-    public JumblerLogic jumbler;
+    public GameObject jumbler;
     public char[] unjumbled;
     public char[] author;
     [SerializeField]
@@ -26,36 +26,31 @@ public class HintLogic : MonoBehaviour
     string TargetColour;
     private GameObject colorChange;
 
-
+    [System.Obsolete]
     public void hints()
     {
 
         // Get the reference to the script
         //hintBox = Instantiate(hintBox);
-        jumbler = FindAnyObjectByType<JumblerLogic>();
+        jumbler = GameObject.FindGameObjectWithTag("jumblerLogic");
         //checkTarget = FindAnyObjectByType<SnapTarget>();
 
         // Point localReference 
         //colourArr = checkTarget.colourArr;
-        unjumbled = jumbler.unjumbled;
-        author = jumbler.author;
-        string auth = new string(author);
+        unjumbled = jumbler.GetComponent<JumblerLogic>().unjumbled;
+        author = jumbler.GetComponent<JumblerLogic>().author;
+        //string auth = new string(author);
         hintCount++;
         if (hintCount == 1)
         {
-            hintStr = " Author: " + auth;
+            hintStr = " Author: " + new string(author);
             textElement.text = hintStr;
         }
         else
         {
             //(check if answer is already correct)
             // change so it checks all snapTarget colours  
-            Debug.Log(":c");
-
             CheckTargets();
-            Debug.Log(targetArr[0].GetComponent<SnapTarget>().snap_Colour);
-
-
 
             for (int j = 0; j < colourArr.Length; j++)
             {  // if red, give hint
@@ -63,7 +58,6 @@ public class HintLogic : MonoBehaviour
                 {
                     giveHint();
                     return;
-
                 }
                 else
                 {
@@ -73,25 +67,36 @@ public class HintLogic : MonoBehaviour
             }
         }
     }
-    
-    
+
+
     public void giveHint()
-        //change to picka  single snapTarget 
+    //change to picka  single snapTarget 
     {
-        int rand = Random.Range(0, targetArr.Length);   // picks random index
-        for (int m = 0; m < targetArr.Length; m++)
+        int rand = Random.Range(0, targetArr.Length - author.Length);   // picks random index
+        for (int m = 0; m < targetArr.Length - author.Length; m++)
         {    // loops hint array to check if rand is green
             if (m == rand)
             {
                 if (targetArr[m].GetComponent<SnapTarget>().snap_Colour != "green")
                 {
                     checkTarget = GameObject.Find("Target " + m);
+                    while (checkTarget.GetComponent<SnapTarget>().snapLetterText.color == Color.white ||
+                        checkTarget.GetComponent<SnapTarget>().snapLetterText.text == " ")
+                    {
+                        if (m >= targetArr.Length - author.Length)
+                        {
+                            m = 0;
+                        }
+                        checkTarget = GameObject.Find("Target " + m++);
+
+                    }
                     checkTarget.GetComponent<SnapTarget>().snapLetterText.color = Color.white;
-                    
+
                 }
             }
         }
     }
+    
 
     public void CheckTargets()
     {
