@@ -27,8 +27,10 @@ public class JumblerLogic : MonoBehaviour
         "Leonhard Euler", "Radia Perlman", "Mary Allen Wilkes"};
 
     public char[] unjumbled;
-    public int numQuote = 10;
     public char[] author;
+    public char [] jumbled;
+    bool test;
+    public QuoteDatabase[] quoteDatabase;
     public char[] jumbled;
     public GameObject[] letterInstants; // changed to gameobject array 
     int randQuote;
@@ -60,6 +62,10 @@ public class JumblerLogic : MonoBehaviour
 
     public void stringJumble()
     {
+        int randQuote = Random.Range(0,quoteDatabase.Length);   //picks random quote and author number
+
+        unjumbled = quoteDatabase[randQuote].quoteText.ToCharArray();
+        author = quoteDatabase[randQuote].quoteAuthor.ToCharArray();
         randQuote = Random.Range(0,numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
         author = person[randQuote].ToCharArray();
