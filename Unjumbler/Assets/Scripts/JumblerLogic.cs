@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using TMPro;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEngine;
-using TMPro;
 using Unity.VisualScripting.FullSerializer;
-using Unity.Burst.CompilerServices;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class JumblerLogic : MonoBehaviour
@@ -31,13 +32,12 @@ public class JumblerLogic : MonoBehaviour
     public char[] jumbled;
     public GameObject[] letterInstants; // changed to gameobject array 
     int randQuote;
-    public bool allCaps = true; //***FOR CAPITALIZATION LOGIC***
-    public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
+    //public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
     public GameObject hintBox; //need to make UI popup for hint box
     public string hintStr;
     public char[] hintArr;
     public SnapTarget checkTarget;
-    public string[] colourArr;
+    public string[] colourArr; //**Referenced also by SnapTarget**
     public int hintCount = 0;
 
     public int targetMaxChar;
@@ -50,6 +50,10 @@ public class JumblerLogic : MonoBehaviour
     private GameObject snapPrefab;
     [SerializeField]
     private GameObject snapSpawn;
+
+    [SerializeField] //for the makeUpper method (below)
+    public DragObject checkLetter;
+    public GameObject[] letterArr; 
 
     [SerializeField]
     private GameObject infinitePrefab;
@@ -85,7 +89,7 @@ public class JumblerLogic : MonoBehaviour
             
         }
 
-        upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
+        //upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
     }
 
     public void instantiateDraggableLetters(bool infiniteAlphabet)
@@ -115,24 +119,43 @@ public class JumblerLogic : MonoBehaviour
 
     }
 
-    public void changeCapitalization()
+    public void makeUpper()
     {
+        letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
+        for (int k = 0; k < letterArr.Length; k++)
+        {
+            bool thisLetter = letterArr[k].GetComponent<DragObject>().isUpperInSentenceCase;
+            if (thisLetter == false)
+            {
+                string uncapitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText.text;
+                uncapitalizeLetter = uncapitalizeLetter.ToUpper();
+            }
+        }
+        author = author;
+        /*letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
+        for (int k = 0; k < letterArr.Length; k++)
+        {
+            TMP_Text capitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText;
+            capitalizeLetter.text = capitalizeLetter.text.ToUpper();
+        }*/
+    }
+
+    public void makeSentenceCase()
+    {
+        letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
+        for (int k = 0; k < letterArr.Length; k++)
+        {
+            bool thisLetter = letterArr[k].GetComponent<DragObject>().isUpperInSentenceCase;
+            if (thisLetter == false)
+            {
+                string uncapitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText.text;
+                uncapitalizeLetter = uncapitalizeLetter.ToLower();
+            }
+        }
+        author = author;
 
     }
-    // Called when either the "Show Capitalization" or "Hide Capitalization" button is pressed by user
-    /* Here we instantiate the Letters that will be used by the user
-     * Each letter contains a text child element to compare when dropped
-     * in the snapTarget Script. */
-    
 
-    public void checkAnswer()
-    {
-
-    }
-    // Called when the "Check Attempt" button is pressed by user
-    /* To format the snapTargets (blanks) properly without cutting off the words in the
-     * grid layout group we need to be able to detect if the next word instantiating is
-     * longer than the total length of the line we are on. */
     public void instantiateSnapTarget()
     {
         int row = 0;
@@ -145,6 +168,7 @@ public class JumblerLogic : MonoBehaviour
             {
                 GameObject skipInstance = Instantiate(snapPrefab, snapSpawn.transform, true);
                 skipInstance.name = "Target " + x;
+                skipInstance.gameObject.tag = "ignore";
 
                 TMP_Text skipText = skipInstance.GetComponentInChildren<TMP_Text>();
                 skipText.text = unjumbled[x].ToString();
@@ -179,6 +203,7 @@ public class JumblerLogic : MonoBehaviour
 
                         TMP_Text padText = pad.GetComponentInChildren<TMP_Text>();
                         padText.text = " ";
+                        pad.gameObject.tag = "ignore";
                         pad.GetComponent<CanvasRenderer>().SetAlpha(0);
                     }
                     row = 0; // Resets the row when we wrap to the next line.
@@ -198,20 +223,6 @@ public class JumblerLogic : MonoBehaviour
                 instance.GetComponent<CanvasRenderer>().SetAlpha(0);
             }
 
-            checkTarget = FindAnyObjectByType<SnapTarget>();
-            colourArr = checkTarget.colourArr;
-
-            for (int i = 0; i < colourArr.Length; i++)
-            {
-                if (colourArr[i] == "green")
-                {
-                    // turn that letter's colour green
-                }
-                if (colourArr[i] == "red")
-                {
-                    // turn that letter's colour red
-                }
-            }
             // We keep track of our positon on the grid.
             row++;
             if (row >= targetMaxChar)
@@ -221,13 +232,10 @@ public class JumblerLogic : MonoBehaviour
         }
     }
 
-    public string hint() 
+    /*public string hint() 
     {
         // Get the reference to the script
         checkTarget = FindAnyObjectByType<SnapTarget>();
-
-        // Point localReference to the same array in ScriptA
-        colourArr = checkTarget.colourArr;
 
         hintCount ++;
         if (hintCount == 1){ // reveal Author name}
@@ -244,6 +252,7 @@ public class JumblerLogic : MonoBehaviour
             return hintStr;
 
         } else
+
         { //(check if answer is already correct)
             for (int k = 0; k > colourArr.Length; k++)
             {
@@ -273,6 +282,11 @@ public class JumblerLogic : MonoBehaviour
         }
         hintStr = new string(hintArr);
         return hintStr;
+    }*/
+
+    public void exitLevel()
+    {
+        SceneManager.LoadScene("UnjumblerScene");
     }
 
 }
