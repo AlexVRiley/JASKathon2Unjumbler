@@ -84,7 +84,7 @@ public class JumblerLogic : MonoBehaviour
             if (temp != ' ' && unjumbled[randI] != ' ')
             {
                 jumbled[i] = temp;
-                Debug.Log(jumbled[i]);
+                //Debug.Log(jumbled[i]);
             }
             
         }
@@ -99,9 +99,13 @@ public class JumblerLogic : MonoBehaviour
         // Display jumbled letters
             for (int x = 0; x < jumbled.Length; x++)
             {
-                GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
-                instance.name = "Letter " + x;
-                instance.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
+                if (jumbled[x] != ' ')
+                {
+                    GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+                    instance.name = "Letter " + x;
+                    instance.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
+                    Debug.Log(jumbled[x]);
+                }
             }
         }
 
