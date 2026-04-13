@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CheckTarget
   - ignore
+  - jumblerLogic
   layers:
   - Default
   - TransparentFX

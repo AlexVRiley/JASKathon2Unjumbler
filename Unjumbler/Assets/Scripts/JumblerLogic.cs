@@ -131,7 +131,7 @@ public class JumblerLogic : MonoBehaviour
                 uncapitalizeLetter = uncapitalizeLetter.ToUpper();
             }
         }
-
+        author = author;
         /*letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
         for (int k = 0; k < letterArr.Length; k++)
         {
@@ -152,9 +152,10 @@ public class JumblerLogic : MonoBehaviour
                 uncapitalizeLetter = uncapitalizeLetter.ToLower();
             }
         }
+        author = author;
 
     }
-    
+
     public void instantiateSnapTarget()
     {
         int row = 0;
@@ -231,7 +232,7 @@ public class JumblerLogic : MonoBehaviour
         }
     }
 
-    public string hint() 
+    /*public string hint() 
     {
         // Get the reference to the script
         checkTarget = FindAnyObjectByType<SnapTarget>();
@@ -281,7 +282,7 @@ public class JumblerLogic : MonoBehaviour
         }
         hintStr = new string(hintArr);
         return hintStr;
-    }
+    }*/
 
     public void exitLevel()
     {

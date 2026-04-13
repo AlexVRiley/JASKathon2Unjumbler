@@ -470,6 +470,7 @@ MonoBehaviour:
   textElement: {fileID: 290359370}
   hintArr: 
   checkTarget: {fileID: 0}
+  targetArr: []
   colourArr: []
   hintCount: 0
 --- !u!1 &407143879
@@ -933,6 +934,7 @@ MonoBehaviour:
   textElement: {fileID: 0}
   hintArr: 
   checkTarget: {fileID: 0}
+  targetArr: []
   colourArr: []
   hintCount: 0
 --- !u!1 &600766934
@@ -3827,7 +3829,7 @@ GameObject:
   - component: {fileID: 1791172077}
   m_Layer: 0
   m_Name: JumblerLogic
-  m_TagString: Untagged
+  m_TagString: jumblerLogic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4330,7 +4332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4c9cdab08ba484d95c49086cbf3d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HintLogic
-  jumbler: {fileID: 0}
+  jumbler: {fileID: 1791172077}
   unjumbled: 
   author: 
   hintBox: {fileID: 734169953}
@@ -4338,6 +4340,7 @@ MonoBehaviour:
   textElement: {fileID: 290359370}
   hintArr: 
   checkTarget: {fileID: 0}
+  targetArr: []
   colourArr: []
   hintCount: 0
 --- !u!4 &2028222833
@@ -4635,10 +4638,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 1121039450}
   - {fileID: 843351251}
+  - {fileID: 1791172078}
   - {fileID: 305071085}
   - {fileID: 463885846}
   - {fileID: 767317664}
   - {fileID: 1951224438}
   - {fileID: 600766936}
   - {fileID: 2028222833}
-  - {fileID: 1791172078}
