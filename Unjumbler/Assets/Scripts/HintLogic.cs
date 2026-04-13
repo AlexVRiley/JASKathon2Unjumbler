@@ -31,15 +31,11 @@ public class HintLogic : MonoBehaviour
     {
 
         // Get the reference to the script
-        //hintBox = Instantiate(hintBox);
         jumbler = GameObject.FindGameObjectWithTag("jumblerLogic");
-        //checkTarget = FindAnyObjectByType<SnapTarget>();
 
         // Point localReference 
-        //colourArr = checkTarget.colourArr;
         unjumbled = jumbler.GetComponent<JumblerLogic>().unjumbled;
         author = jumbler.GetComponent<JumblerLogic>().author;
-        //string auth = new string(author);
         hintCount++;
         if (hintCount == 1)
         {
