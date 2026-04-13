@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
      * -Upper and lower case button linked to logic 
      * -Check button needs to be linked to logic 
      * -Hint Button linked to logic */
-        oddLevel = false;
+        //oddLevel = false;
     }
 
-}

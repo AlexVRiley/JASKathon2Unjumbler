@@ -19,7 +19,7 @@ public class HintLogic : MonoBehaviour
     public Text textElement;
     public char[] hintArr;
     [SerializeField]
-    public SnapTarget checkTarget;
+    public GameObject checkTarget;
     public GameObject[] targetArr; 
     public string[] colourArr;
     public int hintCount = 0;
@@ -37,12 +37,13 @@ public class HintLogic : MonoBehaviour
 
         // Point localReference 
         //colourArr = checkTarget.colourArr;
-        //unjumbled = jumbler.unjumbled;
+        unjumbled = jumbler.unjumbled;
         author = jumbler.author;
+        string auth = new string(author);
         hintCount++;
         if (hintCount == 1)
         {
-            hintStr = " Author: " + new string(author);
+            hintStr = " Author: " + auth;
             textElement.text = hintStr;
         }
         else
@@ -84,8 +85,8 @@ public class HintLogic : MonoBehaviour
             {
                 if (targetArr[m].GetComponent<SnapTarget>().snap_Colour != "green")
                 {
-                    GameObject c = GameObject.Find("Target " + m);
-                    c.GetComponent<TMP_Text>().color = Color.white;
+                    checkTarget = GameObject.Find("Target " + m);
+                    checkTarget.GetComponent<SnapTarget>().snapLetterText.color = Color.white;
                     
                 }
             }

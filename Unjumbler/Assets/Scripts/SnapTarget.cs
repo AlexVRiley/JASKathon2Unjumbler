@@ -8,8 +8,6 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
     public TMP_Text snapLetterText;
     public bool isHint = false;
     public TextMeshProUGUI textColor;
-    public string snap_Colour;
-    public TMP_Text snapLetterText;
 
     /* When the user ends their drag on a draggable object we check the following: */
     public void OnDrop(PointerEventData eventData)
@@ -41,7 +39,7 @@ public class SnapTarget : MonoBehaviour, IDropHandler, IPointerExitHandler
             if (GameManager.oddLevel == true)
             {
                 // display colour change
-            }*/
+            }
 
         }
     }
