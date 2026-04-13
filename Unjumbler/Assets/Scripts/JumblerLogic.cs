@@ -32,8 +32,7 @@ public class JumblerLogic : MonoBehaviour
     public char[] jumbled;
     public GameObject[] letterInstants; // changed to gameobject array 
     int randQuote;
-    public bool allCaps = true; //***FOR CAPITALIZATION LOGIC***
-    public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
+    //public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
     public GameObject hintBox; //need to make UI popup for hint box
     public string hintStr;
     public char[] hintArr;
@@ -51,6 +50,10 @@ public class JumblerLogic : MonoBehaviour
     private GameObject snapPrefab;
     [SerializeField]
     private GameObject snapSpawn;
+
+    [SerializeField] //for the makeUpper method (below)
+    public DragObject checkLetter;
+    public GameObject[] letterArr; 
 
     [SerializeField]
     private GameObject infinitePrefab;
@@ -86,7 +89,7 @@ public class JumblerLogic : MonoBehaviour
             
         }
 
-        upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
+        //upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
     }
 
     public void instantiateDraggableLetters(bool infiniteAlphabet)
@@ -116,24 +119,41 @@ public class JumblerLogic : MonoBehaviour
 
     }
 
-    public void changeCapitalization()
+    public void makeUpper()
     {
+        letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
+        for (int k = 0; k < letterArr.Length; k++)
+        {
+            bool thisLetter = letterArr[k].GetComponent<DragObject>().isUpperInSentenceCase;
+            if (thisLetter == false)
+            {
+                string uncapitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText.text;
+                uncapitalizeLetter = uncapitalizeLetter.ToUpper();
+            }
+        }
+
+        /*letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
+        for (int k = 0; k < letterArr.Length; k++)
+        {
+            TMP_Text capitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText;
+            capitalizeLetter.text = capitalizeLetter.text.ToUpper();
+        }*/
+    }
+
+    public void makeSentenceCase()
+    {
+        letterArr = GameObject.FindGameObjectsWithTag("DraggableTag");
+        for (int k = 0; k < letterArr.Length; k++)
+        {
+            bool thisLetter = letterArr[k].GetComponent<DragObject>().isUpperInSentenceCase;
+            if (thisLetter == false)
+            {
+                string uncapitalizeLetter = letterArr[k].GetComponent<DragObject>().dragLetterText.text;
+                uncapitalizeLetter = uncapitalizeLetter.ToLower();
+            }
+        }
 
     }
-    // Called when either the "Show Capitalization" or "Hide Capitalization" button is pressed by user
-    /* Here we instantiate the Letters that will be used by the user
-     * Each letter contains a text child element to compare when dropped
-     * in the snapTarget Script. */
-    
-
-    public void checkAnswer()
-    {
-
-    }
-    // Called when the "Check Attempt" button is pressed by user
-    /* To format the snapTargets (blanks) properly without cutting off the words in the
-     * grid layout group we need to be able to detect if the next word instantiating is
-     * longer than the total length of the line we are on. */
     
     public void instantiateSnapTarget()
     {
@@ -147,6 +167,7 @@ public class JumblerLogic : MonoBehaviour
             {
                 GameObject skipInstance = Instantiate(snapPrefab, snapSpawn.transform, true);
                 skipInstance.name = "Target " + x;
+                skipInstance.gameObject.tag = "ignore";
 
                 TMP_Text skipText = skipInstance.GetComponentInChildren<TMP_Text>();
                 skipText.text = unjumbled[x].ToString();
@@ -181,6 +202,7 @@ public class JumblerLogic : MonoBehaviour
 
                         TMP_Text padText = pad.GetComponentInChildren<TMP_Text>();
                         padText.text = " ";
+                        pad.gameObject.tag = "ignore";
                         pad.GetComponent<CanvasRenderer>().SetAlpha(0);
                     }
                     row = 0; // Resets the row when we wrap to the next line.

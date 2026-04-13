@@ -470,6 +470,7 @@ MonoBehaviour:
   textElement: {fileID: 290359370}
   hintArr: 
   checkTarget: {fileID: 0}
+  targetArr: []
   colourArr: []
   hintCount: 0
 --- !u!1 &407143879
@@ -933,6 +934,7 @@ MonoBehaviour:
   textElement: {fileID: 0}
   hintArr: 
   checkTarget: {fileID: 0}
+  targetArr: []
   colourArr: []
   hintCount: 0
 --- !u!1 &600766934
@@ -4338,6 +4340,7 @@ MonoBehaviour:
   textElement: {fileID: 290359370}
   hintArr: 
   checkTarget: {fileID: 0}
+  targetArr: []
   colourArr: []
   hintCount: 0
 --- !u!4 &2028222833

@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using TMPro;
+using Unity.VisualScripting;
 
 public class HintLogic : MonoBehaviour
 {
@@ -17,75 +19,93 @@ public class HintLogic : MonoBehaviour
     public Text textElement;
     public char[] hintArr;
     [SerializeField]
-    public SnapTarget checkTarget;
+    public GameObject checkTarget;
     public GameObject[] targetArr; 
     public string[] colourArr;
     public int hintCount = 0;
     string TargetColour;
+    private GameObject colorChange;
 
 
     public void hints()
     {
-       
+
         // Get the reference to the script
         //hintBox = Instantiate(hintBox);
         jumbler = FindAnyObjectByType<JumblerLogic>();
-        checkTarget = FindAnyObjectByType<SnapTarget>();
+        //checkTarget = FindAnyObjectByType<SnapTarget>();
 
         // Point localReference 
         //colourArr = checkTarget.colourArr;
         unjumbled = jumbler.unjumbled;
         author = jumbler.author;
-
-
+        string auth = new string(author);
         hintCount++;
         if (hintCount == 1)
         {
-            hintStr = " Author: " + new string(author);
+            hintStr = " Author: " + auth;
             textElement.text = hintStr;
-        } else {   
+        }
+        else
+        {
             //(check if answer is already correct)
             // change so it checks all snapTarget colours  
+            Debug.Log(":c");
+
             CheckTargets();
-            {
-                for (int j = 0; j < colourArr.Length; j++)
-                {  // if red, give hint
-                    if (colourArr[j] != "green")
-                    {
-                        giveHint();
-                        textElement.text = hintStr;
-                        return;
-                    }
+            Debug.Log(targetArr[0].GetComponent<SnapTarget>().snap_Colour);
+
+
+
+            for (int j = 0; j < colourArr.Length; j++)
+            {  // if red, give hint
+                if (colourArr[j] != "green")
+                {
+                    giveHint();
+                    return;
+
+                }
+                else
+                {
+                    hintStr = "Congratulations, your solution is correct!";
+                    // write to text box
                 }
             }
-            hintStr = "Congratulations, your solution is correct!";
-            textElement.text = hintStr;
-            // write to text box
         }
     }
+    
+    
     public void giveHint()
         //change to picka  single snapTarget 
     {
-        int rand = Random.Range(0, unjumbled.Length);   // picks random index
-        for (int m = 0; m < unjumbled.Length; m++)
+        int rand = Random.Range(0, targetArr.Length);   // picks random index
+        for (int m = 0; m < targetArr.Length; m++)
         {    // loops hint array to check if rand is green
             if (m == rand)
             {
-                if (colourArr[m] != "green")
+                if (targetArr[m].GetComponent<SnapTarget>().snap_Colour != "green")
                 {
-                    hintArr[m] = unjumbled[m];
+                    checkTarget = GameObject.Find("Target " + m);
+                    checkTarget.GetComponent<SnapTarget>().snapLetterText.color = Color.white;
+                    
                 }
             }
         }
-        hintStr = new string(hintArr);
-        textElement.text = hintStr;
     }
 
     public void CheckTargets()
     {
+        int k = 0;
         targetArr = GameObject.FindGameObjectsWithTag("CheckTarget");
-        for (int k = 0; k < targetArr.Length; k++) {
-            colourArr[k] = targetArr[k].GetComponent<SnapTarget>().snap_Colour;
+        colourArr = new string[targetArr.Length];
+        Debug.Log(targetArr);
+        foreach (GameObject CheckTarget in targetArr) {
+            string currCol = targetArr[k].GetComponent<SnapTarget>().snap_Colour;
+            colourArr[k] = currCol;
+            Debug.Log(targetArr[k].GetComponent<SnapTarget>().snap_Colour);
+
+            k++;
+
         }
     }
 }

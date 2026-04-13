@@ -9,11 +9,12 @@ public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
     private RectTransform rectTransform;
     private Canvas canvas;
     private Transform noGrouping;
+    public bool isUpperInSentenceCase;
 
     [SerializeField]
     private GameObject draggableLetter;
     [SerializeField]
-    private TMP_Text dragLetterText;
+    public TMP_Text dragLetterText;
 
     /* I am using the awake method because it only runs once when the object it is 
      * attatched to becomes active in the scene */
@@ -38,6 +39,14 @@ public class DragObject : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
         if(draggableLetter == null)
         {
             draggableLetter = this.gameObject;
+        }
+        if(dragLetterText.text == "a" || dragLetterText.text == "b" || dragLetterText.text == "c" || dragLetterText.text == "d" || dragLetterText.text == "e" || dragLetterText.text == "f" || dragLetterText.text == "g" || dragLetterText.text == "h" || dragLetterText.text == "i" || dragLetterText.text == "j" || dragLetterText.text == "k" || dragLetterText.text == "l" || dragLetterText.text == "m" || dragLetterText.text == "n" || dragLetterText.text == "o" || dragLetterText.text == "p" || dragLetterText.text == "q" || dragLetterText.text == "r" || dragLetterText.text == "s" || dragLetterText.text == "t" || dragLetterText.text == "u" || dragLetterText.text == "v" || dragLetterText.text == "w" || dragLetterText.text == "x" || dragLetterText.text == "y" || dragLetterText.text == "z")
+        {
+            isUpperInSentenceCase = false;
+        }
+        else
+        {
+            isUpperInSentenceCase = true;
         }
     }
 
