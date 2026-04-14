@@ -65,7 +65,7 @@ public class JumblerLogic : MonoBehaviour
 
         unjumbled = quoteDatabase[randQuote].quoteText.ToCharArray();
         author = quoteDatabase[randQuote].quoteAuthor.ToCharArray();
-        randQuote = Random.Range(0,numQuote);   //picks random quote and author number
+        //randQuote = Random.Range(0,numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
         author = person[randQuote].ToCharArray();
         unjumbled = unjumbled.Concat(" -").ToArray();
@@ -94,8 +94,6 @@ public class JumblerLogic : MonoBehaviour
             }            
                 jumbled[i] = temp;
                 //Debug.Log(jumbled[i]);
-            }
-            
         }
 
         //upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***

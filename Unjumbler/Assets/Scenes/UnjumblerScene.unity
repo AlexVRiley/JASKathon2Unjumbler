@@ -3743,7 +3743,6 @@ GameObject:
   - component: {fileID: 1612166074}
   - component: {fileID: 1612166073}
   - component: {fileID: 1612166072}
-  - component: {fileID: 1612166075}
   m_Layer: 5
   m_Name: CapitalButton
   m_TagString: Untagged
@@ -4866,3 +4865,6 @@ SceneRoots:
   - {fileID: 463885846}
   - {fileID: 767317664}
   - {fileID: 749108874}
+  - {fileID: 1951224438}
+  - {fileID: 600766936}
+  - {fileID: 2028222833}
