@@ -29,6 +29,12 @@ public class JumblerLogic : MonoBehaviour
     public char[] unjumbled;
     public int numQuote = 10;
     public char[] author;
+<<<<<<< HEAD
+=======
+    public char [] jumbled;
+    bool test;
+    public QuoteDatabase[] quoteDatabase;
+>>>>>>> parent of 96e84eb (Fixed some merge errors)
     public char[] jumbled;
     public GameObject[] letterInstants; // changed to gameobject array 
     int randQuote;
