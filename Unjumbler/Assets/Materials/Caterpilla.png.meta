@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 709d72b8c1d637e4e9941bfffeca2e8e
+guid: 5135e041ab126ed43ab242a3ddad393a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1008835075927486360
-    second: transparent caterpillar_0
+      213: 9153590582621591590
+    second: Caterpilla_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -56,7 +56,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 1
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -110,19 +110,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,71 +126,33 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: transparent caterpillar_0
+      name: Caterpilla_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 310
-        height: 308
+        y: 34
+        width: 640
+        height: 573
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 860536ee7d5eff1f0800000000000000
-      internalID: -1008835075927486360
+      spriteID: 62855881326180f70800000000000000
+      internalID: 9153590582621591590
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline:
-    - - {x: 142, y: -131}
-      - {x: 150, y: -86}
-      - {x: 151, y: -48}
-      - {x: 126, y: -19}
-      - {x: 103, y: -21}
-      - {x: 82, y: 3}
-      - {x: 81, y: 23}
-      - {x: 59, y: 55}
-      - {x: 25, y: 96}
-      - {x: -8, y: 112}
-      - {x: -18, y: 124}
-      - {x: -37, y: 138}
-      - {x: -53, y: 139}
-      - {x: -80, y: 133}
-      - {x: -92, y: 123}
-      - {x: -106, y: 135}
-      - {x: -126, y: 137}
-      - {x: -155, y: 132}
-      - {x: -150, y: 112}
-      - {x: -132, y: 118}
-      - {x: -116, y: 117}
-      - {x: -135, y: 101}
-      - {x: -143, y: 75}
-      - {x: -135, y: 52}
-      - {x: -114, y: 35}
-      - {x: -90, y: 29}
-      - {x: -82, y: 18}
-      - {x: -91, y: -14}
-      - {x: -63, y: -8}
-      - {x: -49, y: -20}
-      - {x: -61, y: -37}
-      - {x: -30, y: -45}
-      - {x: -34, y: -55}
-      - {x: -10, y: -83}
-      - {x: -17, y: -91}
-      - {x: 2, y: -101}
-      - {x: 16, y: -115}
-      - {x: 38, y: -135}
+    outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -212,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      transparent caterpillar_0: -1008835075927486360
+      Caterpilla_0: 9153590582621591590
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

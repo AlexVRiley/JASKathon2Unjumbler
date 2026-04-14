@@ -27,10 +27,9 @@ public class JumblerLogic : MonoBehaviour
         "Leonhard Euler", "Radia Perlman", "Mary Allen Wilkes"};
 
     public char[] unjumbled;
+    public int numQuote = 10;
     public char[] author;
-    public char [] jumbled;
-    bool test;
-    public QuoteDatabase[] quoteDatabase;
+    public char[] jumbled;
     public GameObject[] letterInstants; // changed to gameobject array 
     int randQuote;
     //public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
@@ -54,18 +53,14 @@ public class JumblerLogic : MonoBehaviour
 
     [SerializeField] //for the makeUpper method (below)
     public DragObject checkLetter;
-    public GameObject[] letterArr; 
+    public GameObject[] letterArr;
 
     [SerializeField]
     private GameObject infinitePrefab;
 
     public void stringJumble()
     {
-        int randQuote = Random.Range(0,quoteDatabase.Length);   //picks random quote and author number
-
-        unjumbled = quoteDatabase[randQuote].quoteText.ToCharArray();
-        author = quoteDatabase[randQuote].quoteAuthor.ToCharArray();
-        //randQuote = Random.Range(0,numQuote);   //picks random quote and author number
+        randQuote = Random.Range(0, numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
         author = person[randQuote].ToCharArray();
         unjumbled = unjumbled.Concat(" -").ToArray();
@@ -76,7 +71,8 @@ public class JumblerLogic : MonoBehaviour
         for (int j = 0; j <= unjumbled.Length - 1; j++)
         {
             jumbled[j] = unjumbled[j];
-            if (unjumbled[j] != ' '){ 
+            if (unjumbled[j] != ' ')
+            {
                 hintArr[j] = '_';
             }
         }
@@ -91,9 +87,7 @@ public class JumblerLogic : MonoBehaviour
                 jumbled[i] = jumbled[randI];
                 jumbled[randI] = temp;
                 Debug.Log(jumbled[i]);
-            }            
-                jumbled[i] = temp;
-                //Debug.Log(jumbled[i]);
+            }
         }
 
         //upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
@@ -102,8 +96,9 @@ public class JumblerLogic : MonoBehaviour
     public void instantiateDraggableLetters(bool infiniteAlphabet)
     // Initially instantiates all draggable letters as capital letters
     {
-        if (infiniteAlphabet == false) {
-        // Display jumbled letters
+        if (infiniteAlphabet == false)
+        {
+            // Display jumbled letters
             for (int x = 0; x < jumbled.Length; x++)
             {
                 if (jumbled[x] != ' ')
@@ -111,7 +106,6 @@ public class JumblerLogic : MonoBehaviour
                     GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
                     instance.name = "Letter " + x;
                     instance.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
-                    Debug.Log(jumbled[x]);
                 }
             }
         }
