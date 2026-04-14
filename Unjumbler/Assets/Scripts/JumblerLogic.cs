@@ -174,6 +174,7 @@ public class JumblerLogic : MonoBehaviour
                 GameObject skipInstance = Instantiate(snapPrefab, snapSpawn.transform, true);
                 skipInstance.name = "Target " + x;
                 skipInstance.gameObject.tag = "ignore";
+                skipInstance.gameObject.GetComponent<SnapTarget>().snap_Colour = "green";
 
                 TMP_Text skipText = skipInstance.GetComponentInChildren<TMP_Text>();
                 skipText.text = unjumbled[x].ToString();
@@ -205,6 +206,7 @@ public class JumblerLogic : MonoBehaviour
                     {
                         GameObject pad = Instantiate(snapPrefab, snapSpawn.transform, true);
                         pad.name = "Padding";
+                        pad.gameObject.GetComponent<SnapTarget>().snap_Colour = "green";
 
                         TMP_Text padText = pad.GetComponentInChildren<TMP_Text>();
                         padText.text = " ";
