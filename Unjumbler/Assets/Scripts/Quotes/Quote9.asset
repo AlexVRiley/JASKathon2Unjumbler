@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b1e23579000f44f94d3d6f1516d2ef, type: 3}
   m_Name: Quote9
   m_EditorClassIdentifier: Assembly-CSharp::QuoteDatabase
-  quoteText: The world would be a better place if more engineers, like me, hated
-    technology.
-  quoteAuthor: Radia Perlman
+  quoteText: 
+  quoteAuthor: 

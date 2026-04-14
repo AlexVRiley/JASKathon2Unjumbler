@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1534.6667
     height: 784
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Console
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -567,9 +567,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0.8
-    y: 413.6
+    y: 557.60004
     width: 1094.2
-    height: 365.2
+    height: 221.20001
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -613,9 +613,9 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 51238
+    - m_Data: 51192
     m_LastClickedID:
-      m_Data: 51238
+      m_Data: 51192
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 51784
@@ -683,7 +683,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: []
     m_LastClickedEntityId:
       m_Data: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -812,10 +812,6 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -7824
-      - m_Data: -6820
-      - m_Data: -6710
-      - m_Data: -6472
       - m_Data: -1386
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1440,7 +1436,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 907.3, y: 892.72424, z: -2.0738275}
     speed: 2
-    m_Value: {x: 959.7092, y: 517.4551, z: -6.1742353}
+    m_Value: {x: 0, y: 0, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1493,7 +1489,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 911.89264
     speed: 2
-    m_Value: 627.42303
+    m_Value: 10
   m_Ortho:
     m_Target: 1
     speed: 2
