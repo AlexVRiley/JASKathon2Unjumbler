@@ -31,7 +31,6 @@ public class JumblerLogic : MonoBehaviour
     public char [] jumbled;
     bool test;
     public QuoteDatabase[] quoteDatabase;
-    public char[] jumbled;
     public GameObject[] letterInstants; // changed to gameobject array 
     int randQuote;
     //public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
