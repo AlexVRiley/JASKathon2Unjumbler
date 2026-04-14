@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b1e23579000f44f94d3d6f1516d2ef, type: 3}
   m_Name: Quote3
   m_EditorClassIdentifier: Assembly-CSharp::QuoteDatabase
-  quoteText: 
-  quoteAuthor: 
+  quoteText: The most dangerous phrase in the language is, 'We've always done it
+    this way'.
+  quoteAuthor: Grace Hopper

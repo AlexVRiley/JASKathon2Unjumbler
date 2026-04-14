@@ -27,9 +27,10 @@ public class JumblerLogic : MonoBehaviour
         "Leonhard Euler", "Radia Perlman", "Mary Allen Wilkes"};
 
     public char[] unjumbled;
-    public int numQuote = 10;
     public char[] author;
-    public char[] jumbled;
+    public char [] jumbled;
+    bool test;
+    public QuoteDatabase[] quoteDatabase;
     public GameObject[] letterInstants; // changed to gameobject array 
     int randQuote;
     //public char[] upperArr; //***FOR CAPITALIZATION LOGIC***
@@ -60,6 +61,10 @@ public class JumblerLogic : MonoBehaviour
 
     public void stringJumble()
     {
+        int randQuote = Random.Range(0,quoteDatabase.Length);   //picks random quote and author number
+
+        unjumbled = quoteDatabase[randQuote].quoteText.ToCharArray();
+        author = quoteDatabase[randQuote].quoteAuthor.ToCharArray();
         randQuote = Random.Range(0,numQuote);   //picks random quote and author number
         unjumbled = quotes[randQuote].ToCharArray();
         author = person[randQuote].ToCharArray();
@@ -87,6 +92,10 @@ public class JumblerLogic : MonoBehaviour
                 jumbled[randI] = temp;
                 Debug.Log(jumbled[i]);
             }            
+                jumbled[i] = temp;
+                //Debug.Log(jumbled[i]);
+            }
+            
         }
 
         //upperArr = jumbled.Select(char.ToUpper).ToArray(); //***FOR CAPITALIZATION LOGIC***
@@ -99,9 +108,13 @@ public class JumblerLogic : MonoBehaviour
         // Display jumbled letters
             for (int x = 0; x < jumbled.Length; x++)
             {
-                GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
-                instance.name = "Letter " + x;
-                instance.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
+                if (jumbled[x] != ' ')
+                {
+                    GameObject instance = Instantiate(letterPrefab, letterSpawn.transform, true);
+                    instance.name = "Letter " + x;
+                    instance.GetComponentInChildren<TMP_Text>().text = jumbled[x].ToString().ToUpper();
+                    Debug.Log(jumbled[x]);
+                }
             }
         }
 
